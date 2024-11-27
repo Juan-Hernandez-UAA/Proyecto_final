@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #include <cstdlib>
-#include <cmath>
+#include <cmath> /*No lo quiten putos, este es para el de la pelotita*/
 #include <map>
 #include <string>
 #include <iostream>
@@ -131,6 +131,15 @@ void tablaDepreciacion() {
 
 void pelotaLanzada() {
     cout << "Ejecutando: Pelota Lanzada\n";
+    const int CONVERSION=1609, GRAVEDAD=9.81;
+    float metros, altura, millas, angulo;
+    printf("\nDame la velocidad en millas/hora: ");
+    scanf("%f", &millas);
+    printf("\nDame el angulo: ");
+    scanf("%f", &angulo);
+    metros= millas*CONVERSION;
+    altura=(0.5* pow(metros,2)* pow(sin(angulo),2))/GRAVEDAD;
+    printf("\nLa altura maxima alcanzada es: %.2f metros/hora", altura);
 }
 
 void escaleraEdificio() {
