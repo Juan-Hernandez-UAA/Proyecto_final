@@ -93,6 +93,34 @@ void menu() {
 
 void numeroMayor() {
     cout << "Ejecutando: Numero mayor\n";
+    int num1, num2, num3, num4, mayor;
+
+    printf("Equipo Umizumi");
+    printf(" Ingrese el numero 1: ");
+    scanf("%d", &num1);
+    printf("Ingrese el numero 2: ");
+    scanf("%d", &num2);
+    printf("Ingrese el numero 3: ");
+    scanf("%d", &num3);
+    printf("Ingrese el numero 4: ");   
+    scanf("%d", &num4);
+
+    mayor = num1;
+
+    if (num2 > mayor) 
+    {
+        mayor = num2; 
+    }
+    if (num3 > mayor) 
+    {
+        mayor = num3; 
+    }
+    if (num4 > mayor) 
+    {
+        mayor = num4; 
+    }
+    
+    printf("EL numero mayor es: %d\n", mayor);
 }
 
 void oficinaAgua() {
@@ -107,9 +135,57 @@ void numeroBase10() {
     cout << "Ejecutando: Numero base 10\n";
 }
 
-void mcdMcm() {
+void mcdMcm() {   
     cout << "Ejecutando: MCD y MCM\n";
+    int calcularMCD(int a,int b);
+    int calcularMCM(int a,int b, int mcd);
+    int num1,num2,mcd,mcm;
+    char continuar;
+
+    printf("Equipo Umizumi");
+
+        do
+        {
+            printf(" Ingrese el numero 1 positivo: ");
+            scanf("%d",&num1);
+            printf(" Ingrese el numero 2 positivo: ");
+            scanf("%d",&num2);
+                if (num1 > 0 && num2 > 0)
+                {
+                    // Calcular el MCD 
+                    mcd = calcularMCD(num1, num2);
+                    // Calcular el MCM usando el MCD
+                    mcm = calcularMCM(num1, num2, mcd);
+                     // Mostrar los resultados
+                    printf("El MCD de %d y %d es: %d\n", num1, num2, mcd);
+                    printf("El MCM de %d y %d es: %d\n", num1, num2, mcm);
+                } else
+                {
+                    printf("\nAmbos son positivos\n");
+                }
+                 // Preguntar si desea continuar
+                printf("Desea realizar otro clculo (s/n): ");
+                scanf(" %c", &continuar);
+
+                
+        } while (continuar == 's' || continuar == 'S');
+          printf("Gracias por usar el programa, adios.\n");
 }
+    // Función para calcular el MCD usando el Algoritmo de Euclides
+    int calcularMCD(int a, int b) 
+    {
+        while (b != 0) 
+        {
+            int resto = a % b;
+                a = b;
+                b = resto;
+        }
+        return a;
+    }
+    int calcularMCM(int a, int b, int mcd) 
+    {
+        return (a * b) / mcd;
+    }
 
 void encuestaMoviles() {
     cout << "Ejecutando: Encuesta moviles\n";
@@ -117,7 +193,44 @@ void encuestaMoviles() {
 
 void numeroTexto() {
     cout << "Ejecutando: De numero a texto\n";
+    void numeroEnPalabras (int numero);
+    int numero;
+    printf("Equipo Umizumi");
+
+    printf(" Ingresa cualquier numero entre el 0 y 99: ");
+    scanf("%d",&numero);
+        if (numero < 0 || numero > 99)
+        {
+            printf("El numero que usted ingreso, no está en el rango permitido (0-99).\n");
+        } else
+        {
+            printf("El numero en palabras es: ");
+            numeroEnPalabras(numero);
+        }
 }
+void numeroEnPalabras(int numero) 
+{
+    const char *unidades[] = {"Cero", "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve"};
+    const char *especiales[] = {"Diez", "Once", "Doce", "Trece", "Catorce", "Quince", "Dieciseis", "Diecisiete", "Dieciocho", "Diecinueve"};
+    const char *decenas[] = {"", "", "Veinte", "Treinta", "Cuarenta", "Cincuenta", "Sesenta", "Setenta", "Ochenta", "Noventa"};
+
+    if (numero < 10) 
+    {
+        printf("%s\n", unidades[numero]);
+    } else 
+        if (numero < 20) 
+    {
+        printf("%s\n", especiales[numero - 10]);
+    } else 
+        if (numero % 10 == 0) 
+    {
+        printf("%s\n", decenas[numero / 10]);
+    } else 
+    {
+        printf("%s y %s\n", decenas[numero / 10], unidades[numero % 10]);
+    }
+}
+
 
 void salir() {
     cout << "Saliendo del programa...\n";
