@@ -22,6 +22,7 @@
 #include <string>
 #include <iostream>
 #include <functional>
+#include <iomanip>
 
 using namespace std;
 
@@ -35,6 +36,7 @@ using namespace std;
 #define BLUE "\033[34m"
 #define PINK "\033[35m"
 #define CYAN "\033[36m"
+#define Pi 3.1416
 
 // Prototipos de funciones
 void tablaDepreciacion();
@@ -97,7 +99,35 @@ void menu() {
 
 void tablaDepreciacion() {
     cout << "Ejecutando: Tabla de Depreciacion\n";
-}
+    
+    const int costo_inicial = 28000;
+    const int depreciacion_anual = 4000;
+    const int num_anio = 7;
+    int Costo_final;
+    Costo_final = costo_inicial;
+    int depreciacion_acum;
+    depreciacion_acum = 0;
+    int anio = 0;
+    cout << left << setw(10) << "Año"
+        << setw (15) <<"Depreciación"
+        << setw (20) <<"Valor al final del año"
+        << setw (20) <<"Depreciación acumulada" << endl ;
+    for (int i = 0; i < 65; i++ )
+        {    
+            cout << "-";
+        }
+    cout << endl;
+    for ( anio = 1; anio<= num_anio; anio ++)
+    {
+        depreciacion_acum += depreciacion_anual;
+        Costo_final -= costo_inicial;
+
+        cout << left << setw (10) << anio
+        << setw (15) <<depreciacion_anual
+        << setw (20) <<Costo_final
+        << setw (20) <<depreciacion_acum <<endl;
+    }
+    }
 
 void pelotaLanzada() {
     cout << "Ejecutando: Pelota Lanzada\n";
@@ -105,6 +135,24 @@ void pelotaLanzada() {
 
 void escaleraEdificio() {
     cout << "Ejecutando: Escalera en un Edificio\n";
+    const double longitud_escalera_1 = 20;
+    const double angulo_1 = 85; 
+    const double longitud_escalera_2 = 25;
+    const double angulo_2 = 85;
+    
+    double angulo_1_radianes = angulo_1 * Pi/ 180.0;
+    double angulo_2_radianes = angulo_2 * Pi/ 180.0;
+
+    double altura_1 = longitud_escalera_1 * sin(angulo_1_radianes);
+    double altura_2 = longitud_escalera_2 * sin(angulo_2_radianes);
+
+    cout << "Altura alcanzada por la escalera de" << longitud_escalera_1
+    <<" Pies colocada en una angulo de " <<angulo_1 << "grados: "
+    << altura_1 << "pies" << endl;
+
+        cout << "Altura alcanzada por la escalera de" << longitud_escalera_2
+    <<" Pies colocada en una angulo de " <<angulo_2 << "grados: "
+    << altura_2 << "pies" << endl;
 }
 
 void pelotaGolf() {
