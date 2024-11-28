@@ -7,7 +7,7 @@
 | Filename           | main.cpp                           |
 | Team members       | Juan Pablo Hernandez Ramirez       |
 |                    | Contreras Palacios Fernando Andres |
-|                    | Roberto Ruvalcaba Ventura          |
+|                    | Jorge Alberto montes cruz          |
 |                    | Venegas Cons Aida Montserrat       |
 | Date               | 2024-10-31                         |
 | Version            | 1.0.0                              |
@@ -60,7 +60,7 @@ void encabezado() {
     cout << GREEN <<"\nEquipo Umizoomi, lista de integrantes:" << RESET << endl;
     cout << "-" << YELLOW << " (PM) " << RESET << "Hernandez Ramirez Juan Pablo " << endl;
     cout << "- Contreras Palacios Fernando Andres" << endl;
-    cout << "- Robero Ruvalcaba Ventura" << endl;
+    cout << "- Jorge Alberto montes cruz" << endl;
     cout << "- Venegas Cons Aida Montserrat" << "\n\n";
 }
 
