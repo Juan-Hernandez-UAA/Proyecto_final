@@ -99,33 +99,29 @@ void menu() {
 
 void tablaDepreciacion() {
     cout << "Ejecutando: Tabla de Depreciacion\n";
-    
-    const int costo_inicial = 28000;
+    const int costo_incial = 28000;
     const int depreciacion_anual = 4000;
     const int num_anio = 7;
-    int Costo_final;
-    Costo_final = costo_inicial;
-    int depreciacion_acum;
-    depreciacion_acum = 0;
-    int anio = 0;
-    cout << left << setw(10) << "Año"
-        << setw (15) <<"Depreciación"
-        << setw (20) <<"Valor al final del año"
-        << setw (20) <<"Depreciación acumulada" << endl ;
-    for (int i = 0; i < 65; i++ )
-        {    
-            cout << "-";
-        }
-    cout << endl;
-    for ( anio = 1; anio<= num_anio; anio ++)
-    {
-        depreciacion_acum += depreciacion_anual;
-        Costo_final -= costo_inicial;
+    int costo_final = costo_incial;
+    int depreciacion_acum = 0;
+    
+    std::cout << std::left;
+    std::cout << std::setw(6) << "Anio" 
+              << std::setw(15) << "Depreciacion"
+              << std::setw(25) << "Valor al final del anio" 
+              << "Depreciacion acumulada\n";
+    std::cout << "---------------------------------------------------------------\n";
 
-        cout << left << setw (10) << anio
-        << setw (15) <<depreciacion_anual
-        << setw (20) <<Costo_final
-        << setw (20) <<depreciacion_acum <<endl;
+    
+    for (int anio = 1; anio <= num_anio; ++anio) {
+        depreciacion_acum += depreciacion_anual;
+        costo_final = costo_incial - depreciacion_acum;
+
+        
+        std::cout << std::setw(6) << anio                          // Columna Año
+                  << std::setw(15) << depreciacion_anual           // Columna Depreciación
+                  << std::setw(25) << costo_final                  // Columna Valor al final del año
+                  << depreciacion_acum << "\n";                   // Columna Depreciación acumulada
     }
     }
 
