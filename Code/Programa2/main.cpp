@@ -136,57 +136,32 @@ void oficinaAgua()
 void oficinaEjercito()
 {
     cout << "Ejecutando: Oficina del ejercito\n";
-    int edad;
-    float estatura;
-    char genero, estadocivil;
-    char salida[20]; 
-
-    printf("Equipo Umizumi\n");
-
-    printf("Ingrese el genero del voluntario/a (H para hombre y M para mujer): ");
-    scanf(" %c", &genero);
-    printf("Ingrese la estatura del voluntario/a: ");
-    scanf("%f", &estatura);
-    printf("Ingrese la edad del voluntario/a: ");
-    scanf("%d", &edad);
-    printf("Ingrese el estado civil del voluntario/a (S para soltero/a, C para casado/a): ");
-    scanf(" %c", &estadocivil);
-
-    switch (genero) 
-    {
-        case 'M':
-            if (estatura > 1.60 && edad >= 20 && edad <= 25) 
-            {
-                printf("Es Apto"); 
-            } 
-            else
-            {
-                printf("No es Apto"); 
-            }
-            break;
-
-        case 'H':
-            if (estatura > 1.65 && edad >= 18 && edad <= 24) 
-            {
-                printf("Es Apto"); 
-            } 
-            else 
-            {
-                printf("No es Apto"); 
-            }
-            break;
-
-        default:
-            printf("No es Apto"); 
-            break;
-    }
-
-    printf("%s\n", salida); 
 }
 
 void numeroBase10()
 {
     cout << "Ejecutando: Numero base 10\n";
+
+    int numero, suma = 0, cifras = 0;
+
+    printf("Equipo Umizumi\n");
+
+    printf("Ingrese un numero en sistema decimal: ");
+    scanf("%d", &numero);
+
+    if (numero > 0) {
+        int temp = numero;
+        while (temp > 0) {
+            suma += temp % 10;
+            temp /= 10;
+            cifras++;
+        }
+        printf("El numero tiene %d cifras\n", cifras);
+        printf("La suma total entre esos numeros es: %d\n", suma);
+    } else 
+    {
+        printf("El numero no es positivo.\n");
+    }
 }
 
 void mcdMcm()
