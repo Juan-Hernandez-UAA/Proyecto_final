@@ -23,6 +23,7 @@
 #include <iostream>
 #include <functional>
 #include <vector>
+#include <string.h>//Ejercito
 
 using namespace std;
 
@@ -136,6 +137,58 @@ void oficinaAgua()
 void oficinaEjercito()
 {
     cout << "Ejecutando: Oficina del ejercito\n";
+    char sexo, estado, resp, apto[60];
+    int edad;
+    float estatura;
+
+    do{
+        printf("\nSISTEMA DE VALIDACION PARA ASPIRANTES AL EJERCITO");
+        printf("\nIngrese el genero:");
+        printf("\nHombre(H) Mujer(M): ");
+        scanf("%s", &sexo);
+        printf("\nIngrese el estado civil:");
+        printf("\nSoltero(S) Casado(C) Viudo(V) Divorciado(D): ");
+        scanf(" %c", &estado);
+        if (not (estado=='s' or estado=='S'))//se valida si no es soltero para mandar directamente a NO aceptado y no seguir con los demás datos
+        {
+            strcpy(apto,"El aspirante NO es apto para el ejercito");//se va a usar la variable de cadena para ir cambiando el mensaje dependiendo si es apto o no
+        }
+        else
+        {
+            printf("\nIngrese la estatura en mts: ");
+            scanf("%f", &estatura);
+            printf("\nIngrese la edad: ");
+            scanf("%d", &edad);
+            switch (sexo)
+            {
+            case 'M':
+            case 'm':
+                if (estatura>1.6 && (edad>=20 && edad<=25)){//criterios para mujeres
+                    strcpy(apto,"El aspirante SI es apto para el ejercito");
+                }
+                else{
+                    strcpy(apto,"El aspirante NO es apto para el ejercito");
+                }
+            break;    
+            
+            case 'H':
+            case 'h':
+                if (estatura>1.65 && (edad>=18 && edad<=24)){//criterios para hombres
+                    strcpy(apto,"El aspirante SI es apto para el ejercito");
+                }
+                else{
+                    strcpy(apto,"El aspirante NO es apto para el ejercito");
+                }
+            break;
+            
+            default:
+                break;
+            }
+        }
+        printf("\nEl resultado es: %s", apto);
+        printf("\nDesea ingresar otro aspirante?: s/n ");//ciclo por si hay más aspirantes
+        scanf(" %c", &resp);
+    } while (resp=='s' or resp=='S');
 }
 
 void numeroBase10()
