@@ -22,7 +22,6 @@
 #include <string>
 #include <iostream>
 #include <functional>
-#include <iomanip>
 
 using namespace std;
 
@@ -36,7 +35,6 @@ using namespace std;
 #define BLUE "\033[34m"
 #define PINK "\033[35m"
 #define CYAN "\033[36m"
-#define Pi 3.1416
 
 // Prototipos de funciones
 void tablaDepreciacion();

@@ -104,7 +104,6 @@ void distanciaPuntos() {
 
 void cantidadMayor() {
     cout << "Ejecutando: Cantidad mayor\n";
-    
 }
 
 void langostaAhumada() {
