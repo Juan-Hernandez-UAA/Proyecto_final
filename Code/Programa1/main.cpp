@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #include <cstdlib>
-#include <cmath> /*No lo quiten putos, este es para el de la pelotita*/
+#include <cmath> /*Pelotita 1*/
 #include <map>
 #include <string>
 #include <iostream>
@@ -127,14 +127,14 @@ void tablaDepreciacion() {
 
 void pelotaLanzada() {
     cout << "Ejecutando: Pelota Lanzada\n";
-    const int CONVERSION=1609, GRAVEDAD=9.81;
+    const int CONVERSION=1609, GRAVEDAD=9.81; //medida de conversion de millas a mts y valor de la gravedad
     float metros, altura, millas, angulo;
     printf("\nDame la velocidad en millas/hora: ");
     scanf("%f", &millas);
     printf("\nDame el angulo: ");
     scanf("%f", &angulo);
-    metros= millas*CONVERSION;
-    altura=(0.5* pow(metros,2)* pow(sin(angulo),2))/GRAVEDAD;
+    metros= millas*CONVERSION;//se convierte la medida de millas a mts para hacer el calculo
+    altura=(0.5* pow(metros,2)* pow(sin(angulo),2))/GRAVEDAD;//formula para calcular alt maxima
     printf("\nLa altura maxima alcanzada es: %.2f metros/hora", altura);
 }
 
@@ -162,6 +162,34 @@ void escaleraEdificio() {
 
 void pelotaGolf() {
     cout << "Ejecutando: Pelota de Golf\n";
+   
+    const float g = 32.0; // gravedad en pies/s^2
+    const int tiempo_total = 10;
+    float dist_ant, dist_total, dist_inter;
+    // Encabezado de la tabla
+    cout << "\n==========================================================================" << endl;
+    cout << setw(8) << "Tiempo"
+              << setw(33) << "Distancia en el intervalo"
+              << setw(28) << "Distancia total (pies)" << endl;
+    cout << "==========================================================================" << endl;
+    dist_ant = 0.0;
+
+    // for para repetir por cada segundo
+    for (int t = 0; t <= tiempo_total; ++t) {
+        // Formula dist
+        dist_total = 0.5 * g * t * t;
+
+        // Calcular la distancia recorrida del inter actual
+        dist_inter = dist_total - dist_ant;
+
+        // Mostrar resultados en la tabla
+        cout << setw(6) << t
+                  << setw(22) << dist_inter
+                  << setw(28) << dist_total << endl;
+
+        // Se actualiza la dist para el nuevo intervalo (se van sumando)
+        dist_ant = dist_total;
+    }
 }
 
 void cuadrante() {
