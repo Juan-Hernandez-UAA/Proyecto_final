@@ -104,26 +104,26 @@ void tablaDepreciacion() {
     const int num_anio = 7;
     int costo_final = costo_incial;
     int depreciacion_acum = 0;
-    
-    std::cout << std::left;
-    std::cout << std::setw(6) << "Anio" 
-              << std::setw(15) << "Depreciacion"
-              << std::setw(25) << "Valor al final del anio" 
-              << "Depreciacion acumulada\n";
-    std::cout << "---------------------------------------------------------------\n";
 
-    
+    cout << left;
+    cout << setw(6) << "Anio"
+              << setw(15) << "Depreciacion"
+              << setw(25) << "Valor al final del anio"
+              << "Depreciacion acumulada\n";
+    cout << "---------------------------------------------------------------\n";
+
+
     for (int anio = 1; anio <= num_anio; ++anio) {
         depreciacion_acum += depreciacion_anual;
         costo_final = costo_incial - depreciacion_acum;
 
-        
-        std::cout << std::setw(6) << anio                          // Columna Año
-                  << std::setw(15) << depreciacion_anual           // Columna Depreciación
-                  << std::setw(25) << costo_final                  // Columna Valor al final del año
+
+        cout << setw(6) << anio                          // Columna Año
+                  << setw(15) << depreciacion_anual           // Columna Depreciación
+                  << setw(25) << costo_final                  // Columna Valor al final del año
                   << depreciacion_acum << "\n";                   // Columna Depreciación acumulada
     }
-    }
+}
 
 void pelotaLanzada() {
     cout << "Ejecutando: Pelota Lanzada\n";
@@ -141,10 +141,10 @@ void pelotaLanzada() {
 void escaleraEdificio() {
     cout << "Ejecutando: Escalera en un Edificio\n";
     const double longitud_escalera_1 = 20;
-    const double angulo_1 = 85; 
+    const double angulo_1 = 85;
     const double longitud_escalera_2 = 25;
     const double angulo_2 = 85;
-    
+
     double angulo_1_radianes = angulo_1 * Pi/ 180.0;
     double angulo_2_radianes = angulo_2 * Pi/ 180.0;
 
@@ -162,7 +162,7 @@ void escaleraEdificio() {
 
 void pelotaGolf() {
     cout << "Ejecutando: Pelota de Golf\n";
-   
+
     const float g = 32.0; // gravedad en pies/s^2
     const int tiempo_total = 10;
     float dist_ant, dist_total, dist_inter;
