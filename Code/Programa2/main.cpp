@@ -157,9 +157,38 @@ void numeroMayor() {
 
 void oficinaAgua() {
     cout << "Ejecutando: Oficina de agua\n";
+    const int cargo_fijo[6] = {2500, 2800, 3000, 3300, 3700, 4400};
+    const int costo_metro[6] = {2200, 2350, 2600, 3400, 3900, 4800};
+    const int basura_alcantarillado[6] = {5500, 6200, 7400, 8600, 9700, 11000};
+
+    int estrato, metros_consumidos;
+    int total_factura = 0;
+
+    // Solicitud de datos para el cálculo de agua
+    cout << "Ingrese el estrato socioeconomico (1-6): ";
+    cin >> estrato;
+
+    // Validación del estrato
+    if (estrato < 1 || estrato > 6) {
+        cout << "Error, el estrato ingresado es incorrecto, ingrese uno entre 1 y 6" << endl;
+    } else {
+        cout << "Ingrese la cantidad de metros cubicos consumidos: ";
+        cin >> metros_consumidos;
+
+        // Cálculo de factura
+        int indice = estrato - 1; // Ajuste del índice al rango del arreglo
+        total_factura += cargo_fijo[indice];
+        total_factura += costo_metro[indice] * metros_consumidos;
+        total_factura += basura_alcantarillado[indice];
+
+        // Despliegue del resultado
+        cout << "El total a pagar es: $" << total_factura << endl;
+    }
+
 }
 
-void oficinaEjercito() {
+void oficinaEjercito()
+{
     cout << "Ejecutando: Oficina del ejercito\n";
     char sexo, estado, resp, apto[60];
     int edad;

@@ -39,8 +39,6 @@ using namespace std;
 #define PINK "\033[35m"
 #define CYAN "\033[36m"
 
-#define Pi 3.141592653589793238462643383279592
-
 // Prototipos de funciones
 void tablaDepreciacion();
 void pelotaLanzada();
@@ -182,13 +180,13 @@ void escaleraEdificio() {
     double altura_1 = longitud_escalera_1 * sin(angulo_1_radianes);
     double altura_2 = longitud_escalera_2 * sin(angulo_2_radianes);
 
-    cout << "Altura alcanzada por la escalera de" << longitud_escalera_1
+    cout << "Altura alcanzada por la escalera de " << longitud_escalera_1
     <<" Pies colocada en una angulo de " <<angulo_1 << "grados: "
-    << altura_1 << "pies" << endl;
+    << altura_1 << " pies " << endl;
 
-        cout << "Altura alcanzada por la escalera de" << longitud_escalera_2
+        cout << "Altura alcanzada por la escalera de " << longitud_escalera_2
     <<" Pies colocada en una angulo de " <<angulo_2 << "grados: "
-    << altura_2 << "pies" << endl;
+    << altura_2 << " pies " << endl;
 }
 
 void pelotaGolf() {
