@@ -49,7 +49,7 @@ void sumaMatrices();
 void salir();
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
-void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones);
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir);
 void printInfo(const string &message);
 void printError(const string &message);
 void menu();
@@ -63,11 +63,11 @@ int main() {
 void header() {
     system("CLS"); // limpiar consola
     cout << GREEN << BOLD << "Programa No. 4" << RESET << endl;
-    cout << GREEN <<"\nEquipo Umizoomi, lista de integrantes:" << RESET << endl;
+    cout << GREEN <<"Equipo Umizoomi, lista de integrantes:" << RESET << endl;
     cout << "-" << YELLOW << " (PM) " << RESET << "Hernandez Ramirez Juan Pablo " << endl;
     cout << "- Contreras Palacios Fernando Andres" << endl;
     cout << "- Jorge Alberto montes cruz" << endl;
-    cout << "- Venegas Cons Aida Montserrat" << "\n\n";
+    cout << "- Venegas Cons Aida Montserrat" << "\n";
 }
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
@@ -78,13 +78,13 @@ void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
     cout << "Elija una opcion: ";
 }
 
-void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones) {
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir) {
     if (!opciones.count(opcion)) {
         printError("Opcion no valida, intente de nuevo");
         return;
     }
 
-    if (opcion == 8) {
+    if (opcion == opcion_salir) {
         printInfo("Saliendo del programa...");
     } else {
         printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
@@ -125,7 +125,7 @@ void menu() {
         header();    // Reimprimir header
         cout << "\n";
 
-        handleOption(opcion, opciones);
+        handleOption(opcion, opciones, 9);
     } while (opcion != 8);
 }
 

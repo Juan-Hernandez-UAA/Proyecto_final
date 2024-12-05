@@ -28,6 +28,8 @@
 
 using namespace std;
 
+#define PI 3.14159265358979323846
+
 // Definicion de colores para consola
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
@@ -50,7 +52,7 @@ void trianguloLetras();
 void salir();
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
-void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones);
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir);
 void printInfo(const string &message);
 void printError(const string &message);
 void menu();
@@ -64,7 +66,7 @@ int main() {
 void header() {
     system("CLS"); // limpiar consola
     cout << GREEN << BOLD << "Programa No. 1" << RESET << endl;
-    cout << GREEN <<"\nEquipo Umizoomi, lista de integrantes:" << RESET << endl;
+    cout << GREEN <<"Equipo Umizoomi, lista de integrantes:" << RESET << endl;
     cout << "-" << YELLOW << " (PM) " << RESET << "Hernandez Ramirez Juan Pablo " << endl;
     cout << "- Contreras Palacios Fernando Andres" << endl;
     cout << "- Jorge Alberto montes cruz" << endl;
@@ -79,13 +81,13 @@ void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
     cout << "Elija una opcion: ";
 }
 
-void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones) {
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir) {
     if (!opciones.count(opcion)) {
         printError("Opcion no valida, intente de nuevo");
         return;
     }
 
-    if (opcion == 8) {
+    if (opcion == opcion_salir) {
         printInfo("Saliendo del programa...");
     } else {
         printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
@@ -125,7 +127,7 @@ void menu() {
         header();    // Reimprimir header
         cout << "\n";
 
-        handleOption(opcion, opciones);
+        handleOption(opcion, opciones, 8);
     } while (opcion != 8);
 }
 
@@ -174,8 +176,8 @@ void escaleraEdificio() {
     const double longitud_escalera_2 = 25;
     const double angulo_2 = 85;
 
-    double angulo_1_radianes = angulo_1 * Pi/ 180.0;
-    double angulo_2_radianes = angulo_2 * Pi/ 180.0;
+    double angulo_1_radianes = angulo_1 * PI/ 180.0;
+    double angulo_2_radianes = angulo_2 * PI/ 180.0;
 
     double altura_1 = longitud_escalera_1 * sin(angulo_1_radianes);
     double altura_2 = longitud_escalera_2 * sin(angulo_2_radianes);
