@@ -47,19 +47,21 @@ void encuestaMoviles();
 void numeroTexto();
 void salir();
 
+void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones);
+void printInfo(const string &message);
+void printError(const string &message);
 void menu();
-void encabezado();
+void header();
 
-int main()
-{
-    encabezado();
+int main() {
+    header();
     menu();
 }
 
-void encabezado()
-{
+void header() {
     system("CLS");
-    cout << GREEN << BOLD << "Programa Conjunto 2" << RESET << endl;
+    cout << GREEN << BOLD << "Programa No. 2" << RESET << endl;
     cout << GREEN << "\nEquipo Umizoomi, lista de integrantes:" << RESET << endl;
     cout << "-" << YELLOW << " (PM) " << RESET << "Hernandez Ramirez Juan Pablo " << endl;
     cout << "- Contreras Palacios Fernando Andres" << endl;
@@ -67,8 +69,39 @@ void encabezado()
     cout << "- Venegas Cons Aida Montserrat" << "\n\n";
 }
 
-void menu()
-{
+void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
+    cout << YELLOW << "\nMenu:\n" << RESET;
+    for (const auto &opcion : opciones) {
+        cout << opcion.first << ". " << opcion.second.first << endl;
+    }
+    cout << "Elija una opcion: ";
+}
+
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones) {
+    if (!opciones.count(opcion)) {
+        printError("Opcion no valida, intente de nuevo");
+        return;
+    }
+
+    if (opcion == 8) {
+        printInfo("Saliendo del programa...");
+    } else {
+        printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
+        opciones.at(opcion).second(); // Ejecuta la función asociada
+    }
+}
+
+void printInfo(const string &message) {
+    cout << CYAN << message << "\n" << RESET;
+}
+
+void printError(const string &message) {
+    cout << RED << "[ERROR]: " << message << "\n" << RESET;
+}
+
+void menu() {
+    int opcion = -1;
+
     map<int, pair<string, function<void()>>> opciones = {
         {1, {"Numero mayor", numeroMayor}},
         {2, {"Oficina de agua", oficinaAgua}},
@@ -77,30 +110,23 @@ void menu()
         {5, {"MCD y MCM", mcdMcm}},
         {6, {"Encuesta moviles", encuestaMoviles}},
         {7, {"De numero a texto", numeroTexto}},
-        {8, {"Salir", salir}}};
+        {8, {"Salir", salir}}
+    };
 
-    cout << "Menu:\n";
-    for (const auto &opcion : opciones)
-    {
-        cout << opcion.first << ". " << opcion.second.first << endl;
-    }
+    do {
+        displayMenu(opciones);
 
-    cout << "Elija una opcion: ";
-    int opcion;
-    cin >> opcion;
+        cin >> opcion;
 
-    if (opciones.count(opcion))
-    {
-        opciones[opcion].second();
-    }
-    else
-    {
-        cout << "Opcion no valida\n";
-    }
+        system("CLS");   // Limpiar pantalla nuevamente
+        header();    // Reimprimir header
+        cout << "\n";
+
+        handleOption(opcion, opciones);
+    } while (opcion != 8);
 }
 
-void numeroMayor()
-{
+void numeroMayor() {
     cout << "Ejecutando: Numero mayor\n";
     int num1, num2, num3, num4, mayor;
 
@@ -125,17 +151,15 @@ void numeroMayor()
             mayor = numero;
         }
     }
-    
+
     printf("EL numero mayor es: %d\n", mayor);
 }
 
-void oficinaAgua()
-{
+void oficinaAgua() {
     cout << "Ejecutando: Oficina de agua\n";
 }
 
-void oficinaEjercito()
-{
+void oficinaEjercito() {
     cout << "Ejecutando: Oficina del ejercito\n";
     char sexo, estado, resp, apto[60];
     int edad;
@@ -169,8 +193,8 @@ void oficinaEjercito()
                 else{
                     strcpy(apto,"El aspirante NO es apto para el ejercito");
                 }
-            break;    
-            
+            break;
+
             case 'H':
             case 'h':
                 if (estatura>1.65 && (edad>=18 && edad<=24)){//criterios para hombres
@@ -180,7 +204,7 @@ void oficinaEjercito()
                     strcpy(apto,"El aspirante NO es apto para el ejercito");
                 }
             break;
-            
+
             default:
                 break;
             }
@@ -191,8 +215,7 @@ void oficinaEjercito()
     } while (resp=='s' or resp=='S');
 }
 
-void numeroBase10()
-{
+void numeroBase10() {
     cout << "Ejecutando: Numero base 10\n";
 
     int numero, suma = 0, cifras = 0;
@@ -211,14 +234,13 @@ void numeroBase10()
         }
         printf("El numero tiene %d cifras\n", cifras);
         printf("La suma total entre esos numeros es: %d\n", suma);
-    } else 
+    } else
     {
         printf("El numero no es positivo.\n");
     }
 }
 
-void mcdMcm()
-{
+void mcdMcm() {
     cout << "Ejecutando: MCD y MCM\n";
     int calcularMCD(int a, int b);
     int calcularMCM(int a, int b, int mcd);
@@ -272,13 +294,11 @@ int calcularMCM(int a, int b, int mcd)
     return (a * b) / mcd;
 }
 
-void encuestaMoviles()
-{
+void encuestaMoviles() {
     cout << "Ejecutando: Encuesta moviles\n";
 }
 
-void numeroTexto()
-{
+void numeroTexto() {
     cout << "Ejecutando: De numero a texto\n";
     void numeroEnPalabras(int numero);
     int numero;
@@ -320,7 +340,6 @@ void numeroEnPalabras(int numero)
     }
 }
 
-void salir()
-{
+void salir() {
     cout << "Saliendo del programa...\n";
 }
