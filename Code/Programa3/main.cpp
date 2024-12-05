@@ -46,25 +46,60 @@ void naufragoSatisfecho();
 void companiaPaqueteria();
 void salir();
 
+void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir);
+void printInfo(const string &message);
+void printError(const string &message);
 void menu();
-void encabezado();
+void header();
 
 int main() {
-    encabezado();
+    header();
     menu();
 }
 
-void encabezado() {
+void header() {
     system("CLS"); // limpiar consola
-    cout << GREEN << BOLD << "Programa No. 1" << RESET << endl;
-    cout << GREEN <<"\nEquipo Umizoomi, lista de integrantes:" << RESET << endl;
+    cout << GREEN << BOLD << "Programa No. 3" << RESET << endl;
+    cout << GREEN <<"Equipo Umizoomi, lista de integrantes:" << RESET << endl;
     cout << "-" << YELLOW << " (PM) " << RESET << "Hernandez Ramirez Juan Pablo " << endl;
     cout << "- Contreras Palacios Fernando Andres" << endl;
     cout << "- Jorge Alberto montes cruz" << endl;
-    cout << "- Venegas Cons Aida Montserrat" << "\n\n";
+    cout << "- Venegas Cons Aida Montserrat" << "\n";
+}
+
+void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
+    cout << YELLOW << "\nMenu:\n" << RESET;
+    for (const auto &opcion : opciones) {
+        cout << opcion.first << ". " << opcion.second.first << endl;
+    }
+    cout << "Elija una opcion: ";
+}
+
+void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir) {
+    if (!opciones.count(opcion)) {
+        printError("Opcion no valida, intente de nuevo");
+        return;
+    }
+
+    if (opcion == opcion_salir) {
+        printInfo("Saliendo del programa...");
+    } else {
+        printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
+        opciones.at(opcion).second(); // Ejecuta la función asociada
+    }
+}
+
+void printInfo(const string &message) {
+    cout << CYAN << message << "\n" << RESET;
+}
+
+void printError(const string &message) {
+    cout << RED << "[ERROR]: " << message << "\n" << RESET;
 }
 
 void menu() {
+    // Mapa de opciones con texto y funciones
     map<int, pair<string, function<void()>>> opciones = {
         {1, {"Area de la figura", areaFigura}},
         {2, {"Distancia entre dos puntos", distanciaPuntos}},
@@ -77,55 +112,60 @@ void menu() {
         {9, {"Salir", salir}}
     };
 
-    cout << "Menu:\n";
-    for (const auto& opcion : opciones) {
-        cout << opcion.first << ". " << opcion.second.first << endl;
-    }
+    int opcion = -1;
 
-    cout << "Elija una opcion: ";
-    int opcion;
-    cin >> opcion;
+    do {
+        displayMenu(opciones); // Mostrar el menú
 
-    if (opciones.count(opcion)) {
-        opciones[opcion].second();
-    } else {
-        cout << "Opcion no valida\n";
-    }
+        cin >> opcion;
+
+        system("CLS"); // Limpiar la pantalla después de la selección
+        header();      // Mostrar header personalizado
+        cout << "\n";
+
+        handleOption(opcion, opciones, 9); // Manejar la opción seleccionada
+    } while (opcion != 9); // Repetir el menú hasta que el usuario elija salir
 }
 
 // Prototipos adicionales para funciones del conjunto 3
-void areaFigura() {
-    cout << "Ejecutando: Area de la figura\n";
-}
+void areaFigura() {}
 
 void distanciaPuntos() {
-    cout << "Ejecutando: Distancia entre dos puntos\n";
+    int x1, y1, x2, y2;
+
+    cout << "Ingresa la coordenada X del primer punto (" << RED << "X1" << RESET << ", Y1)(X2, Y2): ";
+    cin >> x1;
+    cout << "\033[1A\033[K";
+    cout << "Ingresa la coordenada Y del primer punto (X1, " << RED << "Y1" << RESET << ")(X2, Y2): ";
+    cin >> y1;
+    cout << "\033[1A\033[K";
+    cout << "Ingresa la coordenada Y del primer punto (X1, Y1)(" << RED << "X2" << RESET << ", Y2): ";
+    cin >> x2;
+    cout << "\033[1A\033[K";
+    cout << "Ingresa la coordenada Y del primer punto (X1, Y1)(X2, " << RED << "Y2" << RESET << "): ";
+    cin >> y2;
+    cout << "\033[1A\033[K";
+
+    double distancia = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+    cout << "La distancia entre los puntos (" << x1 << ", " << y1 << ") y (" << x2 << ", " << y2 << ") es: " << distancia << endl;
 }
 
 void cantidadMayor() {
-    cout << "Ejecutando: Cantidad mayor\n";
 }
 
 void langostaAhumada() {
-    cout << "Ejecutando: La langosta ahumada\n";
 }
 
 void companiaTelefonica() {
-    cout << "Ejecutando: Compania telefonica\n";
 }
 
 void companiaViajes() {
-    cout << "Ejecutando: Compania de viajes\n";
 }
 
 void naufragoSatisfecho() {
-    cout << "Ejecutando: Naufrago satisfecho\n";
 }
 
 void companiaPaqueteria() {
-    cout << "Ejecutando: Compania de paqueteria\n";
 }
 
-void salir() {
-    cout << "Saliendo del programa...\n";
-}
+void salir() {}
