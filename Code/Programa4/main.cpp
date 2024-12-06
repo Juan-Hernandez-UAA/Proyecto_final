@@ -133,7 +133,6 @@ void menu() {
 void elCometa() {
 }
 
-<<<<<<< HEAD
 void sueldoEmpleados() 
 {
     cout << "Ejecutando: Sueldo empleados\n";
@@ -167,10 +166,8 @@ void sueldoEmpleados()
         tp += ss;
     }
     printf("\nEl pago total de la empresa por %d trabajadores es: %.2f\n", n, tp);
-=======
-void sueldoEmpleados() {
->>>>>>> b06d8a8f7972c0c956c96fde210571b3844568e2
 }
+
 
 void elMandilon() {
 }
@@ -178,7 +175,6 @@ void elMandilon() {
 void sumaVectores() {
 }
 
-<<<<<<< HEAD
 void tercerVector() 
 {
     cout << "Ejecutando: Generando tercer vector\n";
@@ -302,74 +298,6 @@ void empresaBigOld()
         }
         printf("\nTotal de kilometros: %d\n", TK[i]);
         printf("---------------------------------\n");
-=======
-void tercerVector() {
-}
-
-void tiendaTikiTaka() {
-}
-
-void empresaBigOld() {
-}
-
-void llenarMatrizAleatoria(int** matriz, int filas, int columnas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            matriz[i][j] = rand() % 10;  // Valores aleatorios entre 0 y 9
-        }
-    }
-}
-
-void llenarMatrizManual(int** matriz, string alias, int filas, int columnas) {
-    cout << "Introduce los valores para la matriz " << alias << ":" << endl;
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            cout << "Elemento en [" << i << "][" << j << "]: ";
-            cin >> matriz[i][j];
-        }
-    }
-}
-
-void mostrarMatriz(int** matriz, int filas, int columnas) {
-    // Calcular el ancho necesario para los delimitadores
-    int width = 2;  // El ancho de cada celda (puedes ajustarlo si deseas más espacio)
-
-    // Delimitador superior
-    cout << "+";
-    for (int i = 0; i < columnas; i++) {
-        for (int j = 0; j <= width; j++) {
-            cout << "-"; // Genera el guion para llenar el ancho completo
-        }
-        cout << "+";
-    }
-    cout << endl;
-
-    // Mostrar las filas de la matriz
-    for (int i = 0; i < filas; i++) {
-        cout << "|";
-        for (int j = 0; j < columnas; j++) {
-            cout << setw(width) << setfill(' ') << matriz[i][j] << " |"; // Ajuste con espaciado
-        }
-        cout << endl;
-
-        cout << "+";
-        for (int j = 0; j < columnas; j++) {
-            for (int k = 0; k <= width; k++) {
-                cout << "-"; // Genera el guion para llenar el ancho completo
-            }
-            cout << "+";
-        }
-        cout << endl;
-    }
-}
-
-
-void sumarMatrices(int** matrizA, int** matrizB, int** resultado, int filas, int columnas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            resultado[i][j] = matrizA[i][j] + matrizB[i][j];
-        }
->>>>>>> b06d8a8f7972c0c956c96fde210571b3844568e2
     }
 }
 
