@@ -135,8 +135,41 @@ void menu() {
 void elCometa() {
 }
 
-void sueldoEmpleados() {
+void sueldoEmpleados() 
+{
+    cout << "Ejecutando: Sueldo empleados\n";
+    int n, sh, dt, i, d;
+    float ht, ph, ss, tp = 0;
+
+    printf("Equipo Umizumi");
+
+    printf("\nIngresa la cantidad de trabajadores que hay en la empresa: ");
+    scanf("%d", &n);
+    printf("Ingrese el pago por hora: ");
+    scanf("%f", &ph);
+
+    for (i = 1; i <= n; i++) 
+    {
+        printf("\nTrabajador #%d\n", i);
+        printf("\nIngrese la cantidad de dias que se trabajaron: ");
+        scanf("%d", &dt);
+
+        sh = 0; 
+
+        for (d = 1; d <= dt; d++) 
+        {
+            printf("\nGuardar las horas que se registraron en el trabajo durante el dia %d: ", d);
+            scanf("%f", &ht);
+            sh += ht; 
+        }
+        ss = sh * ph;
+        printf("\nEl sueldo semanal del trabajador #%d es este: %.2f\n", i, ss);
+
+        tp += ss;
+    }
+    printf("\nEl pago total de la empresa por %d trabajadores es: %.2f\n", n, tp);
 }
+
 
 void elMandilon() {
     // Definimos los structs dentro de la función elMandilon
@@ -254,72 +287,129 @@ void elMandilon() {
 void sumaVectores() {
 }
 
-void tercerVector() {
-}
+void tercerVector() 
+{
+    cout << "Ejecutando: Generando tercer vector\n";
 
-void tiendaTikiTaka() {
-}
+    int A[10], B[10], C[10];
 
-void empresaBigOld() {
-}
+    printf("Equipo Umizumi");
 
-void llenarMatrizAleatoria(int** matriz, int filas, int columnas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            matriz[i][j] = rand() % 10;  // Valores aleatorios entre 0 y 9
+    printf("\nIngresa el valor del primer vector (10 productos):\n");
+
+    for (int i = 0; i < 10; i++) 
+    {
+        printf("Producto %d: ", i + 1);
+        scanf("%d", &A[i]);
+    }
+
+    printf("\nAhora ingresa el valor del segundo vector (10 productos):\n");
+
+    for (int i = 0; i < 10; i++) 
+    {
+        printf("Producto %d: ", i + 1);
+        scanf("%d", &B[i]);
+    }
+    for (int i = 0; i < 10; i++) 
+    {
+        if (B[i] == A[i]) 
+        {
+
+            C[i] = B[i];
+        } else if (B[i] > A[i]) 
+        {
+            C[i] = 2 * (B[i] - A[i]);
+        } else 
+        {
+            C[i] = B[i];
         }
+    }
+
+    printf("\nLos valores del vector C son: ");
+    for (int i = 0; i < 15; i++) 
+    {
+        printf("Producto %d: %d\n", i + 1, C[i]);
     }
 }
 
-void llenarMatrizManual(int** matriz, string alias, int filas, int columnas) {
-    cout << "Introduce los valores para la matriz " << alias << ":" << endl;
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            cout << "Elemento en [" << i << "][" << j << "]: ";
-            cin >> matriz[i][j];
+void tiendaTikiTaka() 
+{
+    cout << "Ejecutando: Tienda tiki taka\n";
+   float n, v, T1 = 0, T2 = 0, T3 = 0, TT = 0;
+    int cn = 0, A = 0, B = 0, C = 0;
+
+    printf("Equipo Umizumi");
+
+    printf("\nIngrese el numero total de ventas realizadas: ");
+    scanf("%f", &n);
+
+    while (cn < n) 
+    {
+        printf("\nIngrese el monto de la venta #%d: ", cn + 1);
+        scanf("%f", &v);
+
+        TT = v + 1; 
+
+        if (v > 1000) 
+        {
+            A = A + 1;
+            T1 = v + 1; 
+        } 
+        else if (v > 500 && v <= 1000) 
+        {
+            B = B + 1;
+            T2 = v + 1; 
+        } 
+        else 
+        {
+            C = C + 1;
+            T3 = v + 1; 
         }
+        cn = cn + 1;
     }
+    printf("\nResultados del dia:\n");
+    printf("\nVentas totales de Ventas 1: %d, la venta en total vendria siendo: %.2f", A, T1);
+    printf("\nVentas totales de Ventas 2: %d, la venta en total vendria siendo: %.2f", B, T2);
+    printf("\nVentas totales de Ventas 3: %d, la venta en total vendria siendo: %.2f", C, T3);
+    printf("\nTotal de ventas: %.2f\n", TT);
 }
 
-void mostrarMatriz(int** matriz, int filas, int columnas) {
-    // Calcular el ancho necesario para los delimitadores
-    int width = 2;  // El ancho de cada celda (puedes ajustarlo si deseas más espacio)
+void empresaBigOld() 
+{
+    cout << "Ejecutando: Empresa big old\n";
+    int n, i, j, k[100][6], TK[100] = {0};
+    char nc[100][50];
 
-    // Delimitador superior
-    cout << "+";
-    for (int i = 0; i < columnas; i++) {
-        for (int j = 0; j <= width; j++) {
-            cout << "-"; // Genera el guion para llenar el ancho completo
+    printf("Equipo Umizumi");
+
+    printf("\nIngresa el numero de choferes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        printf("\nIngrese el nombre del chofer #%d: ", i + 1);
+        scanf("%[^\n]", nc[i]);
+
+        printf("\nIngrese los km que se han recorrido por dia para %s: \n", nc[i]);
+        for ( j = 0; j < 6; j++)
+        {
+            printf("Dia %d: ", j+1);
+            scanf("%d", &k[i][j]);
+            TK[i] = TK[i] + k[i][j];
         }
-        cout << "+";
     }
-    cout << endl;
-
-    // Mostrar las filas de la matriz
-    for (int i = 0; i < filas; i++) {
-        cout << "|";
-        for (int j = 0; j < columnas; j++) {
-            cout << setw(width) << setfill(' ') << matriz[i][j] << " |"; // Ajuste con espaciado
+    printf("\nREPORTE DE KILOMETROS QUE SE HAN RECORRIDO\n");
+    printf("=================================\n");
+    for ( i = 0; i < n; i++)
+    {
+        printf("Chofer: %s\n", nc[i]);
+        printf("Kilometros por dia: ");
+        for ( j = 0; j < 6; j++)
+        {
+            printf("%d ", k[i][j]);
         }
-        cout << endl;
-
-        cout << "+";
-        for (int j = 0; j < columnas; j++) {
-            for (int k = 0; k <= width; k++) {
-                cout << "-"; // Genera el guion para llenar el ancho completo
-            }
-            cout << "+";
-        }
-        cout << endl;
-    }
-}
-
-
-void sumarMatrices(int** matrizA, int** matrizB, int** resultado, int filas, int columnas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            resultado[i][j] = matrizA[i][j] + matrizB[i][j];
-        }
+        printf("\nTotal de kilometros: %d\n", TK[i]);
+        printf("---------------------------------\n");
     }
 }
 
