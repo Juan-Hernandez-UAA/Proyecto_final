@@ -133,7 +133,59 @@ void menu() {
 
 // ----- Funciones principales
 void elCometa() {
+    int clave;
+    float costoMateriaPrima, costoManoObra, gastosFabricacion, costoProduccion, precioVenta;
+    char repetir;
+
+    do {
+        // Registro o entrada de clave para que inicie el código
+        do {
+            printf("Ingrese la clave del articulo (1-6): ");
+            scanf("%d", &clave);
+            if (clave < 1 || clave > 6) {
+                printf("Clave invalida. Por favor, ingrese una clave entre 1 y 6.\n");
+            }
+        } while (clave < 1 || clave > 6);  // Función para repetir hasta que la opción sea válida
+
+        // Entrada del costo de la materia prima
+        printf("Ingrese el costo de la materia prima: ");
+        scanf("%f", &costoMateriaPrima);
+
+        // Calcular el costo de la mano de obra
+        if (clave == 3 || clave == 4) {
+            costoManoObra = costoMateriaPrima * 0.75;
+        } else if (clave == 1 || clave == 5) {
+            costoManoObra = costoMateriaPrima * 0.80;
+        } else if (clave == 2 || clave == 6) {
+            costoManoObra = costoMateriaPrima * 0.85;
+        }
+
+        // Calcular los gastos de fabricación
+        if (clave == 2 || clave == 5) {
+            gastosFabricacion = costoMateriaPrima * 0.30;
+        } else if (clave == 3 || clave == 6) {
+            gastosFabricacion = costoMateriaPrima * 0.35;
+        } else if (clave == 1 || clave == 4) {
+            gastosFabricacion = costoMateriaPrima * 0.28;
+        }
+
+        // Calcular el costo de producción y el precio de venta
+        costoProduccion = costoMateriaPrima + costoManoObra + gastosFabricacion;
+        precioVenta = costoProduccion * 1.45;
+
+        // Datos que se imprimirán para el usuario
+        printf("Costo de mano de obra: %.2f\n", costoManoObra);
+        printf("Gastos de fabricacion: %.2f\n", gastosFabricacion);
+        printf("Costo de produccion: %.2f\n", costoProduccion);
+        printf("Precio de venta: %.2f\n", precioVenta);
+
+        // Opción por si el usuario requiere repetir el proceso
+        printf("Desea realizar otra operación? (S/N): ");
+        scanf(" %c", &repetir);
+
+    } while (repetir == 'S' || repetir == 's');
 }
+
 
 void sueldoEmpleados() 
 {
@@ -285,7 +337,49 @@ void elMandilon() {
 }
 
 void sumaVectores() {
+    int N, i;
+    char repetir;
+
+    do {
+        // Captura de datos en N
+        printf("Ingrese el numero de elementos en los vectores: ");
+        scanf("%d", &N);
+
+        // El numero de datos en el vector se declaran por N
+        float A[N], B[N], C[N];
+
+        // Asignación de datos a la variable A
+        printf("Ingrese los elementos del vector A:\n");
+        for (i = 0; i < N; i++) {
+            printf("A[%d]: ", i);
+            scanf("%f", &A[i]);
+        }
+
+        // Asignación de datos a la variable B
+        printf("Ingrese los elementos del vector B:\n");
+        for (i = 0; i < N; i++) {
+            printf("B[%d]: ", i);
+            scanf("%f", &B[i]);
+        }
+
+        // Sumar los vectores A y B, almacenando el resultado en C
+        for (i = 0; i < N; i++) {
+            C[i] = A[i] + B[i];
+        }
+
+        // Imprimir el resultado de La variable C
+        printf("El vector resultante C es:\n");
+        for (i = 0; i < N; i++) {
+            printf("C[%d]: %.2f\n", i, C[i]);
+        }
+
+        // Preguntar si desea repetir
+        printf("Desea realizar otra operacion? (S/N): ");
+        scanf(" %c", &repetir);
+
+    } while (repetir == 'S' || repetir == 's');
 }
+
 
 void tercerVector() 
 {

@@ -168,6 +168,35 @@ void distanciaPuntos() {
 }
 
 void cantidadMayor() {
+    float numero1, numero2, numero3, mayor;
+    char repetir;
+
+    do {
+        // Entrada de los tres números
+        printf("Ingrese el primer valor (A): ");
+        scanf("%f", &numero1);
+        printf("Ingrese el segundo valor (B): ");
+        scanf("%f", &numero2);
+        printf("Ingrese el tercer valor (C): ");
+        scanf("%f", &numero3);
+
+        // Determinar el mayor
+        if (numero1 >= numero2 && numero1 >= numero3) {
+            mayor = numero1;
+        } else if (numero2 >= numero1 && numero2 >= numero3) {
+            mayor = numero2;
+        } else {
+            mayor = numero3;
+        }
+
+        // Mostrar el resultado
+        printf("El mayor valor es: %.2f\n", mayor);
+
+        // Preguntar al usuario si desea realizar otra operación
+        printf("¿Desea realizar otra operación? (S/N): ");
+        scanf(" %c", &repetir);
+
+    } while (repetir == 'S' || repetir == 's');  // Repetir si el usuario ingresa 'S' o 's'
 }
 
 void langostaAhumada() {
@@ -263,6 +292,51 @@ void companiaTelefonica() {
 }
 
 void companiaViajes() {
+    char tipo_autobus;
+    float distancia, costo_total, costo_por_persona;
+    int personas;
+
+    // Ingreso de datos
+    printf("Ingrese el tipo de autobus (A, B, C): ");
+    scanf(" %c", &tipo_autobus);  // El espacio antes de %c es para consumir cualquier caracter previo en el buffer
+    printf("Ingrese la distancia en kilometros: ");
+    scanf("%f", &distancia);
+    printf("Ingrese el numero de personas: ");
+    scanf("%d", &personas);
+
+    // Ajustar el número de personas si es menor a 20
+    if (personas < 20) {
+        personas = 20;
+    }
+
+    // Asignar el precio del boleto dependiendo el tipo de autobus
+    switch (tipo_autobus) {
+        case 'A':
+        case 'a':
+            costo_por_persona = 2.0;
+            break;
+        case 'B':
+        case 'b':
+            costo_por_persona = 2.5;
+            break;
+        case 'C':
+        case 'c':
+            costo_por_persona = 3.0;
+            break;
+        default:
+            printf("Tipo de autobus invalido.\n");
+    }
+
+    // Formula para el costo total
+    costo_total = distancia * personas * costo_por_persona;
+
+    // Formula para el costo por persona
+    costo_por_persona = costo_total / personas;
+
+    // Datos a imprimir
+    printf("Costo total del viaje: $%.2f\n", costo_total);
+    printf("Costo por persona: $%.2f\n", costo_por_persona);
+
 }
 
 void naufragoSatisfecho() {
