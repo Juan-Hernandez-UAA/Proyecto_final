@@ -138,8 +138,6 @@ void elCometa() {
 void sueldoEmpleados() {
 }
 
-
-
 void elMandilon() {
     // Definimos los structs dentro de la función elMandilon
     struct Empleado {
@@ -153,8 +151,7 @@ void elMandilon() {
 
         // Calcular las ventas totales de la tienda
         float calcularVentasTotales() const {
-            return accumulate(empleados.begin(), empleados.end(), 0.0f,
-                              [](float total, const Empleado& emp) { return total + emp.ventas; });
+            return accumulate(empleados.begin(), empleados.end(), 0.0f, [](float total, const Empleado& emp) { return total + emp.ventas; });
         }
     };
 
@@ -164,8 +161,7 @@ void elMandilon() {
 
         // Calcular las ventas totales de la ciudad
         float calcularVentasTotales() const {
-            return accumulate(tiendas.begin(), tiendas.end(), 0.0f,
-                              [](float total, const Tienda& tienda) { return total + tienda.calcularVentasTotales(); });
+            return accumulate(tiendas.begin(), tiendas.end(), 0.0f, [](float total, const Tienda& tienda) { return total + tienda.calcularVentasTotales(); });
         }
     };
 
