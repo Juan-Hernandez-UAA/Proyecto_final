@@ -17,14 +17,14 @@
 
 #include <stdio.h>
 #include <cstdlib>
-#include <cmath> /*Pelotita 1*/
+#include <cmath>
 #include <map>
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include <functional>
 #include <vector>
-
+#include <stdexcept>
 
 using namespace std;
 
@@ -42,11 +42,11 @@ using namespace std;
 #define CYAN "\033[36m"
 
 // Prototipos de funciones
+int cuadrante();
 void tablaDepreciacion();
 void pelotaLanzada();
 void escaleraEdificio();
 void pelotaGolf();
-void cuadrante();
 void ecuacion();
 void trianguloLetras();
 void salir();
@@ -222,7 +222,51 @@ void pelotaGolf() {
     }
 }
 
-void cuadrante() {
+// Funcion perteneciente a cuadrante
+float obtenerAngulo() {
+    float angulo;
+    cout << "Dame el angulo de la linea: ";
+    cin >> angulo;
+
+    if (cin.fail()) {
+        throw invalid_argument("Entrada no valida. Por favor ingresa un numero.");
+    }
+    if (angulo < 0 || angulo > 360) {
+        throw out_of_range("El angulo debe estar entre 0 y 360 grados.");
+    }
+    return angulo;
+}
+
+// Funcion perteneciente a cuadrante
+string determinarCuadrante(float angulo) {
+    if (angulo > 0 && angulo < 90) {
+        return "en el cuadrante I";
+    }
+    if (angulo > 90 && angulo < 180) {
+        return "en el cuadrante II";
+    }
+    if (angulo > 180 && angulo < 270) {
+        return "en el cuadrante III";
+    }
+    if (angulo > 270 && angulo < 360) {
+        return "en el cuadrante IV";
+    }
+    return "en un eje";
+}
+
+// Funcion principal: cuadrante
+int cuadrante() {
+    try {
+        float angulo = obtenerAngulo();
+        string resultado = determinarCuadrante(angulo);
+        cout << "El punto con angulo " << angulo << " se encuentra "
+             << YELLOW << resultado << RESET << "." << endl;
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
+        return 1; // Indicar fallo en la ejecucion
+    }
+
+    return 0; // Ejecucion exitosa
 }
 
 void ecuacion() {
