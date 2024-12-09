@@ -159,15 +159,16 @@ void tablaDepreciacion() {
 }
 
 void pelotaLanzada() {
-    const int CONVERSION=1609, GRAVEDAD=9.81; //medida de conversion de millas a mts y valor de la gravedad
+    const float CONVERSION=0.44704, GRAVEDAD=9.81; //medida de conversion de millas/h a mts/s y valor de la gravedad
     float metros, altura, millas, angulo;
     printf("\nDame la velocidad en millas/hora: ");
     scanf("%f", &millas);
     printf("\nDame el angulo: ");
     scanf("%f", &angulo);
     metros= millas*CONVERSION;//se convierte la medida de millas a mts para hacer el calculo
-    altura=(0.5* pow(metros,2)* pow(sin(angulo),2))/GRAVEDAD;//formula para calcular alt maxima
-    printf("\nLa altura maxima alcanzada es: %.2f metros/hora", altura);
+    angulo = angulo * M_PI / 180; //Conversión de grados a radianes
+    altura = pow(metros * sin(angulo), 2) / (2 * GRAVEDAD);//formula para calcular alt maxima
+    printf("\nLa altura maxima alcanzada es: %.2f metros", altura);
 }
 
 void escaleraEdificio() {
