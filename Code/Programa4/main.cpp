@@ -141,7 +141,7 @@ void sueldoEmpleados()
 
     printf("Equipo Umizumi");
 
-    printf("\nFavor de ingresar la cantidad de trabajadores que hay en la empresa: ");
+    printf("\nIngresa la cantidad de trabajadores que hay en la empresa: ");
     scanf("%d", &n);
     printf("Ingrese el pago por hora: ");
     scanf("%f", &ph);
@@ -156,7 +156,7 @@ void sueldoEmpleados()
 
         for (d = 1; d <= dt; d++) 
         {
-            printf("\nIngresa las horas que se registraron en el trabajo durante el dia %d: ", d);
+            printf("\nGuardar las horas que se registraron en el trabajo durante el dia %d: ", d);
             scanf("%f", &ht);
             sh += ht; 
         }
@@ -183,7 +183,7 @@ void tercerVector()
 
     printf("Equipo Umizumi");
 
-    printf("\nPor favor ingresa el valor del primer vector (10 productos):\n");
+    printf("\nIngresa el valor del primer vector (10 productos):\n");
 
     for (int i = 0; i < 10; i++) 
     {
