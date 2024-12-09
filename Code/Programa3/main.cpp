@@ -128,7 +128,24 @@ void menu() {
 }
 
 // Prototipos adicionales para funciones del conjunto 3
-void areaFigura() {}
+void areaFigura() {
+    const float PI=3.1416;
+    float hipo, radio, cateto, areatri, areacir, areatotal;
+    printf("\nINICIANDO CALCULADOR DEL AREA....\n");
+    printf("\nDame el valor de R: ");
+    scanf("%f", &radio);
+    printf("\nDame el valor de H: ");
+    scanf("%f", &hipo);
+    // Cálculo del cateto faltante
+    cateto= sqrt(pow(hipo, 2) - pow(radio, 2));
+    // Cálculo del área triangular
+    areatri= 2*(radio*cateto)/2;
+    // Cálculo del área del semicírculo
+    areacir= (PI*radio*radio)/2;
+    // Área total
+    areatotal= areatri+areacir;
+    printf("\nEl area total de la figura es: %.2f", areatotal);
+}
 
 void distanciaPuntos() {
     int x1, y1, x2, y2;
@@ -188,7 +205,7 @@ void companiaTelefonica() {
     printf("\nCOMPANIA TELEFONICA CHIMEFON");
     printf("\nIniciando calculador de tarifa....");
     do{
-        printf("\nIngrese el tiempo de su llamada: ");
+        printf("\nIngrese los minutos de su llamada: ");
         scanf("%f", &tiempo);
         printf("\nIngrese el dia de realizacion de la llamada (H)Dia habil (D)Domingo :");
         scanf(" %c", &dia);
