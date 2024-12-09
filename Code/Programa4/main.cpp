@@ -141,7 +141,7 @@ void sueldoEmpleados()
 
     printf("Equipo Umizumi");
 
-    printf("\nIngrese la cantidad de trabajadores que hay en la empresa: ");
+    printf("\nFavor de ingresar la cantidad de trabajadores que hay en la empresa: ");
     scanf("%d", &n);
     printf("Ingrese el pago por hora: ");
     scanf("%f", &ph);
