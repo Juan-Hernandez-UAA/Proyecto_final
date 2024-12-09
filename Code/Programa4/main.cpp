@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <cmath>
+#include <vector>
+#include <numeric>
 #include <map>
 #include <string>
 #include <iostream>
@@ -126,17 +128,131 @@ void menu() {
         cout << "\n";
 
         handleOption(opcion, opciones, 9);
-    } while (opcion != 8);
+    } while (opcion != 9);
 }
 
-
+// ----- Funciones principales
 void elCometa() {
 }
 
 void sueldoEmpleados() {
 }
 
+
+
 void elMandilon() {
+    // Definimos los structs dentro de la función elMandilon
+    struct Empleado {
+        string nombre;
+        float ventas;
+    };
+
+    struct Tienda {
+        string nombre;
+        vector<Empleado> empleados;
+
+        // Calcular las ventas totales de la tienda
+        float calcularVentasTotales() const {
+            return accumulate(empleados.begin(), empleados.end(), 0.0f,
+                              [](float total, const Empleado& emp) { return total + emp.ventas; });
+        }
+    };
+
+    struct Ciudad {
+        string nombre;
+        vector<Tienda> tiendas;
+
+        // Calcular las ventas totales de la ciudad
+        float calcularVentasTotales() const {
+            return accumulate(tiendas.begin(), tiendas.end(), 0.0f,
+                              [](float total, const Tienda& tienda) { return total + tienda.calcularVentasTotales(); });
+        }
+    };
+
+    // Función para registrar empleados
+    auto registrarEmpleado = [](vector<Empleado>& empleados) {
+        int numEmpleados;
+        cout << "  Cuantos empleados tiene esta tienda?: ";
+        cin >> numEmpleados;
+        empleados.resize(numEmpleados);
+
+        int contador_empleados = 1;
+
+        for (Empleado& emp : empleados) {
+            cout << "  Nombre del empleado No. " << contador_empleados << ": ";
+            cin >> emp.nombre;
+            cout << "  Ventas de " << emp.nombre << ": $";
+            cin >> emp.ventas;
+
+            contador_empleados ++;
+        }
+    };
+
+    // Función para registrar tiendas
+    auto registrarTienda = [&registrarEmpleado](vector<Tienda>& tiendas) {  // Capturamos registrarEmpleado
+        int numTiendas;
+        cout << "\nCuantas tiendas tiene esta ciudad?: ";
+        cin >> numTiendas;
+        tiendas.resize(numTiendas);
+
+        int contador_tiendas = 1;
+
+        for (Tienda& tienda : tiendas) {
+            cout << BOLD << "\nNombre de la tienda No. " << contador_tiendas << ": ";
+            cin >> tienda.nombre;
+            cout << RESET;
+            registrarEmpleado(tienda.empleados);  // Llamamos a registrarEmpleado
+
+            contador_tiendas ++;
+        }
+    };
+
+    // Función principal de elMandilon
+    int numCiudades;
+    cout << "\nEn cuantas ciudades " YELLOW << "el mandilon" << RESET << " tiene prescencia?: ";
+    cin >> numCiudades;
+
+    vector<Ciudad> ciudades(numCiudades);
+
+    int contador_ciudades = 1;
+
+    for (Ciudad& ciudad : ciudades) {
+        string strCiudad = "\nNombre de la ciudad No. " + to_string(contador_ciudades) + ": ";
+        cout << YELLOW << BOLD << strCiudad;
+        cin >> ciudad.nombre;
+
+        // generar separador dinamico
+        int longitud = strCiudad.length() + ciudad.nombre.length() + 3;
+        cout << setw(longitud) << setfill('=') << RESET << endl;
+
+        registrarTienda(ciudad.tiendas);
+
+        contador_ciudades ++;
+    }
+
+    // Resumen de ventas
+    cout << YELLOW << BOLD << "\n\nResumen de ventas" << RESET << endl;
+    float ventasTotalesCadena = 0;
+    for (const Ciudad& ciudad : ciudades) {
+        float ventasCiudad = ciudad.calcularVentasTotales();
+        ventasTotalesCadena += ventasCiudad;
+
+        cout << left << setfill(' '); // resetear el formato
+        cout << BOLD << "\nResumen de ganancias en " << ciudad.nombre << RESET << endl;
+        cout << setw(30) << "Ventas en la ciudad" << "$" << ventasCiudad << endl;
+
+        for (const Tienda& tienda : ciudad.tiendas) {
+            float ventasTienda = tienda.calcularVentasTotales();
+            string strTienda = "Tienda \"" + tienda.nombre + "\"";
+            cout << setw(30) << strTienda << "$" << ventasTienda << endl;
+
+            for (const Empleado& emp : tienda.empleados) {
+                string strEmpleado = "Empleado " + emp.nombre;
+                cout << setw(30) << strEmpleado << "$" << emp.ventas << endl;
+            }
+        }
+    }
+    cout << GREEN << setw(31) << "\nVentas totales de la cadena" << "$" << ventasTotalesCadena << RESET << endl;
 }
 
 void sumaVectores() {
