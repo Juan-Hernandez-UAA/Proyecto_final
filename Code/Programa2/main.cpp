@@ -325,7 +325,26 @@ int calcularMCM(int a, int b, int mcd)
 
 void encuestaMoviles() {
     cout << "Ejecutando: Encuesta moviles\n";
+    int opcion;
+
+    printf("Encuesta: Seleccione la plataforma para desarrollar las tematicas:\n");
+    printf("1. Android\n");
+    printf("2. iOS\n");
+    printf("Ingrese su opcion (1 o 2): ");
+    scanf("%d", &opcion);
+
+    switch (opcion) {
+        case 1:
+            printf("Ha elegido Android.\n");
+            break;
+        case 2:
+            printf("Ha elegido iOS.\n");
+            break;
+        default:
+            printf("Esa opcion es incorrecta, incluya una opcion correcta.\n");
+    }
 }
+
 
 void numeroTexto() {
     cout << "Ejecutando: De numero a texto\n";
