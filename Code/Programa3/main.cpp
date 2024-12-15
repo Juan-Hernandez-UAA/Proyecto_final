@@ -237,45 +237,52 @@ void langostaAhumada() {
 void companiaTelefonica() {
     float tiempo, costo, impuesto, total;
     char dia, resp, turno;
+
     // PEDIDO DE VARIABLES PRINCIPALES
     printf("\nCOMPANIA TELEFONICA CHIMEFON");
     printf("\nIniciando calculador de tarifa....\n");
+
     do {
         printf("\nIngrese los minutos de su llamada: ");
         scanf("%f", &tiempo);
-        printf("Ingrese el dia de realizacion de la llamada Dia habil(H) Domingo(D) :");
+        printf("Ingrese el dia de realizacion de la llamada Dia habil(H) Domingo(D): ");
         scanf(" %c", &dia);
+
         // VALIDACIONES DE DATO DIA
         if (!(dia == 'h' || dia == 'H' || dia == 'd' || dia == 'D')) {
-            printf("\nERROR EN EL DIA INGRESADO");
+            printError("El dia ingresado no es valido");
         } else {
             // VALIDACION DE DATO TURNO
-            printf("Ingrese el turno de realizacion de la llamada Matutino(M) Vespertino(V) :");
+            printf("Ingrese el turno de realizacion de la llamada Matutino(M) Vespertino(V): ");
             scanf(" %c", &turno);
             if (!(turno == 'm' || turno == 'M' || turno == 'v' || turno == 'V')) {
-                printf("\nERROR EN EL TURNO INGRESADO");
+                printf("\nERROR EN EL TURNO INGRESADO\n");
             } else {
+                // Calculo de costo por bloques de tiempo
                 if (tiempo <= 5) {
-                    costo = tiempo * 1;
+                    costo = tiempo * 1; // Primer bloque de 5 minutos
                 } else if (tiempo <= 8) {
-                    costo = (tiempo - 5) * 0.8 + 5;
+                    costo = (tiempo - 5) * 0.8 + 5; // Primer bloque de 5 minutos + siguiente bloque de 3 minutos
                 } else if (tiempo <= 10) {
-                    costo = (tiempo - 8) * 0.7 + 7.4;
+                    costo = (tiempo - 8) * 0.7 + 5 * 1 + 3 * 0.8; // Primer bloque de 5 minutos + siguiente bloque de 3 minutos + siguiente bloque de 2 minutos
                 } else {
-                    costo = (tiempo - 10) * 0.5 + 8.8;
+                    costo = (tiempo - 10) * 0.5 + 5 * 1 + 3 * 0.8 + 2 * 0.7; // Primer bloque de 5 minutos + siguiente bloque de 3 minutos + siguiente bloque de 2 minutos + bloque extra de más de 10 minutos
                 }
 
+                // Calculo del impuesto
                 if (dia == 'd' || dia == 'D') {
-                    impuesto = costo * 0.5;
+                    impuesto = costo * 0.03;  // 3% en domingo
                 } else if (turno == 'm' || turno == 'M') {
-                    impuesto = costo * 0.15;
+                    impuesto = costo * 0.15;  // 15% en turno matutino
                 } else {
-                    impuesto = costo * 0.10;
+                    impuesto = costo * 0.10;  // 10% en turno vespertino
                 }
+
                 total = costo + impuesto;
                 printf("%sEl total a pagar es de: $%.2f%s\n", YELLOW, total, RESET);
             }
         }
+
         printf("\nDesea calcular otra llamada? (s/n): ");
         scanf(" %c", &resp);
     } while (resp == 's' || resp == 'S');
