@@ -7,7 +7,7 @@
 | Filename           | main.cpp                           |
 | Team members       | Juan Pablo Hernandez Ramirez       |
 |                    | Contreras Palacios Fernando Andres |
-|                    | Jorge Alberto montes cruz          |
+|                    | Roberto Ruvalcaba Ventura          |
 |                    | Venegas Cons Aida Montserrat       |
 | Date               | 2024-10-31                         |
 | Version            | 1.0.0                              |
@@ -15,17 +15,18 @@
 +--------------------+------------------------------------+
 */
 
-#include <stdio.h>
-#include <cstdlib>
 #include <cmath>
-#include <vector>
-#include <numeric>
-#include <map>
-#include <string>
-#include <iostream>
-#include <iomanip>
-#include <functional>
+#include <cstdlib>
 #include <ctime>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <numeric>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
 
 using namespace std;
 
@@ -65,10 +66,10 @@ int main() {
 void header() {
     system("CLS"); // limpiar consola
     cout << GREEN << BOLD << "Programa No. 4" << RESET << endl;
-    cout << GREEN <<"Equipo Umizoomi, lista de integrantes:" << RESET << endl;
+    cout << GREEN << "Equipo Umizoomi, lista de integrantes:" << RESET << endl;
     cout << "-" << YELLOW << " (PM) " << RESET << "Hernandez Ramirez Juan Pablo " << endl;
     cout << "- Contreras Palacios Fernando Andres" << endl;
-    cout << "- Jorge Alberto montes cruz" << endl;
+    cout << "- Roberto Ruvalcaba Ventura" << endl;
     cout << "- Venegas Cons Aida Montserrat" << "\n";
 }
 
@@ -123,8 +124,8 @@ void menu() {
 
         cin >> opcion;
 
-        system("CLS");   // Limpiar pantalla nuevamente
-        header();    // Reimprimir header
+        system("CLS"); // Limpiar pantalla nuevamente
+        header();      // Reimprimir header
         cout << "\n";
 
         handleOption(opcion, opciones, 9);
@@ -145,7 +146,7 @@ void elCometa() {
             if (clave < 1 || clave > 6) {
                 printf("Clave invalida. Por favor, ingrese una clave entre 1 y 6.\n");
             }
-        } while (clave < 1 || clave > 6);  // Función para repetir hasta que la opción sea válida
+        } while (clave < 1 || clave > 6); // Función para repetir hasta que la opción sea válida
 
         // Entrada del costo de la materia prima
         printf("Ingrese el costo de la materia prima: ");
@@ -174,54 +175,57 @@ void elCometa() {
         precioVenta = costoProduccion * 1.45;
 
         // Datos que se imprimirán para el usuario
-        printf("Costo de mano de obra: %.2f\n", costoManoObra);
+        printf("%sCosto de mano de obra: %.2f\n", YELLOW, costoManoObra);
         printf("Gastos de fabricacion: %.2f\n", gastosFabricacion);
         printf("Costo de produccion: %.2f\n", costoProduccion);
-        printf("Precio de venta: %.2f\n", precioVenta);
+        printf("Precio de venta: %.2f%s\n", precioVenta, RESET);
 
         // Opción por si el usuario requiere repetir el proceso
-        printf("Desea realizar otra operación? (S/N): ");
+        printf("\nDesea realizar otra operacion? (s/n): ");
         scanf(" %c", &repetir);
+        cout << "\n";
 
     } while (repetir == 'S' || repetir == 's');
 }
 
-
-void sueldoEmpleados() 
-{
-    cout << "Ejecutando: Sueldo empleados\n";
-    int n, sh, dt, i, d;
-    float ht, ph, ss, tp = 0;
-
-    printf("Equipo Umizumi");
+void sueldoEmpleados() {
+    int numTrabajadores, horasTrabajadas, diasTrabajados, i, dia;
+    float horasDia, pagoPorHora, sueldoSemanal, totalPago = 0;
 
     printf("\nIngresa la cantidad de trabajadores que hay en la empresa: ");
-    scanf("%d", &n);
-    printf("Ingrese el pago por hora: ");
-    scanf("%f", &ph);
+    scanf("%d", &numTrabajadores);
+    printf("Ingrese el pago por hora: $");
+    scanf("%f", &pagoPorHora);
 
-    for (i = 1; i <= n; i++) 
-    {
-        printf("\nTrabajador #%d\n", i);
-        printf("\nIngrese la cantidad de dias que se trabajaron: ");
-        scanf("%d", &dt);
+    for (i = 1; i <= numTrabajadores; i++) {
+        printf("%s\nTrabajador #%d%s\n", YELLOW, i, RESET);
+        printf("Ingrese la cantidad de dias que se trabajaron: ");
+        scanf("%d", &diasTrabajados);
 
-        sh = 0; 
+        horasTrabajadas = 0;
+        dia = 1;
 
-        for (d = 1; d <= dt; d++) 
-        {
-            printf("\nGuardar las horas que se registraron en el trabajo durante el dia %d: ", d);
-            scanf("%f", &ht);
-            sh += ht; 
+        while (dia <= diasTrabajados) {
+            printf("Horas laboradas el dia %d: ", dia);
+            scanf("%f", &horasDia);
+
+            if (horasDia > 0 && horasDia < 24) {
+                horasTrabajadas += horasDia;
+                dia++;
+            } else {
+                printError("Las horas ingresadas no son validas");
+            }
         }
-        ss = sh * ph;
-        printf("\nEl sueldo semanal del trabajador #%d es este: %.2f\n", i, ss);
 
-        tp += ss;
+        sueldoSemanal = horasTrabajadas * pagoPorHora;
+        printf("El sueldo semanal del trabajador #%d es de: %.2f\n", i, sueldoSemanal);
+
+        totalPago += sueldoSemanal;
     }
-    printf("\nEl pago total de la empresa por %d trabajadores es: %.2f\n", n, tp);
-}
 
+    cout << YELLOW << "\nLa empresa pagara $" << totalPago << " por " << numTrabajadores
+         << (numTrabajadores > 1 ? " trabajadores" : " trabajador") << RESET << endl;
+}
 
 void elMandilon() {
     // Definimos los structs dentro de la función elMandilon
@@ -236,7 +240,7 @@ void elMandilon() {
 
         // Calcular las ventas totales de la tienda
         float calcularVentasTotales() const {
-            return accumulate(empleados.begin(), empleados.end(), 0.0f, [](float total, const Empleado& emp) { return total + emp.ventas; });
+            return accumulate(empleados.begin(), empleados.end(), 0.0f, [](float total, const Empleado &emp) { return total + emp.ventas; });
         }
     };
 
@@ -246,12 +250,12 @@ void elMandilon() {
 
         // Calcular las ventas totales de la ciudad
         float calcularVentasTotales() const {
-            return accumulate(tiendas.begin(), tiendas.end(), 0.0f, [](float total, const Tienda& tienda) { return total + tienda.calcularVentasTotales(); });
+            return accumulate(tiendas.begin(), tiendas.end(), 0.0f, [](float total, const Tienda &tienda) { return total + tienda.calcularVentasTotales(); });
         }
     };
 
     // Función para registrar empleados
-    auto registrarEmpleado = [](vector<Empleado>& empleados) {
+    auto registrarEmpleado = [](vector<Empleado> &empleados) {
         int numEmpleados;
         cout << "  Cuantos empleados tiene esta tienda?: ";
         cin >> numEmpleados;
@@ -259,18 +263,18 @@ void elMandilon() {
 
         int contador_empleados = 1;
 
-        for (Empleado& emp : empleados) {
+        for (Empleado &emp : empleados) {
             cout << "  Nombre del empleado No. " << contador_empleados << ": ";
             cin >> emp.nombre;
             cout << "  Ventas de " << emp.nombre << ": $";
             cin >> emp.ventas;
 
-            contador_empleados ++;
+            contador_empleados++;
         }
     };
 
     // Función para registrar tiendas
-    auto registrarTienda = [&registrarEmpleado](vector<Tienda>& tiendas) {  // Capturamos registrarEmpleado
+    auto registrarTienda = [&registrarEmpleado](vector<Tienda> &tiendas) { // Capturamos registrarEmpleado
         int numTiendas;
         cout << "\nCuantas tiendas tiene esta ciudad?: ";
         cin >> numTiendas;
@@ -278,13 +282,13 @@ void elMandilon() {
 
         int contador_tiendas = 1;
 
-        for (Tienda& tienda : tiendas) {
+        for (Tienda &tienda : tiendas) {
             cout << BOLD << "\nNombre de la tienda No. " << contador_tiendas << ": ";
             cin >> tienda.nombre;
             cout << RESET;
-            registrarEmpleado(tienda.empleados);  // Llamamos a registrarEmpleado
+            registrarEmpleado(tienda.empleados); // Llamamos a registrarEmpleado
 
-            contador_tiendas ++;
+            contador_tiendas++;
         }
     };
 
@@ -297,7 +301,7 @@ void elMandilon() {
 
     int contador_ciudades = 1;
 
-    for (Ciudad& ciudad : ciudades) {
+    for (Ciudad &ciudad : ciudades) {
         string strCiudad = "\nNombre de la ciudad No. " + to_string(contador_ciudades) + ": ";
         cout << YELLOW << BOLD << strCiudad;
         cin >> ciudad.nombre;
@@ -308,13 +312,13 @@ void elMandilon() {
 
         registrarTienda(ciudad.tiendas);
 
-        contador_ciudades ++;
+        contador_ciudades++;
     }
 
     // Resumen de ventas
     cout << YELLOW << BOLD << "\n\nResumen de ventas" << RESET << endl;
     float ventasTotalesCadena = 0;
-    for (const Ciudad& ciudad : ciudades) {
+    for (const Ciudad &ciudad : ciudades) {
         float ventasCiudad = ciudad.calcularVentasTotales();
         ventasTotalesCadena += ventasCiudad;
 
@@ -322,12 +326,12 @@ void elMandilon() {
         cout << BOLD << "\nResumen de ganancias en " << ciudad.nombre << RESET << endl;
         cout << setw(30) << "Ventas en la ciudad" << "$" << ventasCiudad << endl;
 
-        for (const Tienda& tienda : ciudad.tiendas) {
+        for (const Tienda &tienda : ciudad.tiendas) {
             float ventasTienda = tienda.calcularVentasTotales();
             string strTienda = "Tienda \"" + tienda.nombre + "\"";
             cout << setw(30) << strTienda << "$" << ventasTienda << endl;
 
-            for (const Empleado& emp : tienda.empleados) {
+            for (const Empleado &emp : tienda.empleados) {
                 string strEmpleado = "Empleado " + emp.nombre;
                 cout << setw(30) << strEmpleado << "$" << emp.ventas << endl;
             }
@@ -368,142 +372,202 @@ void sumaVectores() {
         }
 
         // Imprimir el resultado de La variable C
-        printf("El vector resultante C es:\n");
+        printf("\n%sEl vector resultante C es: [", YELLOW);
         for (i = 0; i < N; i++) {
-            printf("C[%d]: %.2f\n", i, C[i]);
+            cout << C[i] << (i < N - 1 ? ", " : "]\n");
         }
+        cout << RESET;
 
         // Preguntar si desea repetir
-        printf("Desea realizar otra operacion? (S/N): ");
+        printf("\nDesea realizar otra operacion? (s/n): ");
         scanf(" %c", &repetir);
+        cout << "\n";
 
     } while (repetir == 'S' || repetir == 's');
 }
 
-
-void tercerVector() 
-{
-    cout << "Ejecutando: Generando tercer vector\n";
-
+void tercerVector() {
     int A[10], B[10], C[10];
 
-    printf("Equipo Umizumi");
+    // Encabezado con instrucciones claras
+    printf("Sistema de Inventario de Productos\n");
 
-    printf("\nIngresa el valor del primer vector (10 productos):\n");
-
-    for (int i = 0; i < 10; i++) 
-    {
+    // Ingreso de datos para el primer vector A (stock de productos)
+    printf("\nIngrese los valores del primer vector (Inventario de productos):\n");
+    for (int i = 0; i < 10; i++) {
         printf("Producto %d: ", i + 1);
         scanf("%d", &A[i]);
     }
 
-    printf("\nAhora ingresa el valor del segundo vector (10 productos):\n");
-
-    for (int i = 0; i < 10; i++) 
-    {
+    // Ingreso de datos para el segundo vector B (pedidos de clientes)
+    printf("\nIngrese los valores del segundo vector (Pedidos de clientes):\n");
+    for (int i = 0; i < 10; i++) {
         printf("Producto %d: ", i + 1);
         scanf("%d", &B[i]);
     }
-    for (int i = 0; i < 10; i++) 
-    {
-        if (B[i] == A[i]) 
-        {
 
-            C[i] = B[i];
-        } else if (B[i] > A[i]) 
-        {
-            C[i] = 2 * (B[i] - A[i]);
-        } else 
-        {
-            C[i] = B[i];
+    // Generación del tercer vector C (productos a comprar para mantener el inventario)
+    for (int i = 0; i < 10; i++) {
+        if (B[i] == A[i]) {
+            C[i] = B[i];  // Si los valores son iguales, no hay necesidad de comprar más
+        } else if (B[i] > A[i]) {
+            C[i] = 2 * (B[i] - A[i]);  // Si el pedido es mayor, comprar el doble de la diferencia
+        } else {
+            C[i] = B[i];  // Si el inventario es mayor, solo comprar lo necesario según el pedido
         }
     }
 
-    printf("\nLos valores del vector C son: ");
-    for (int i = 0; i < 15; i++) 
-    {
-        printf("Producto %d: %d\n", i + 1, C[i]);
+    // Presentación de resultados de manera más clara
+    printf("%s\nResultados del Inventario:\n\n%s", YELLOW, RESET);
+    printf("=============================================================\n");
+    printf("%-10s %-16s %-12s %-15s\n", "Producto", "Inventario (A)", "Pedido (B)", "Compra Necesaria (C)");
+    printf("=============================================================\n");
+
+    // Mostrar los resultados en una tabla
+    for (int i = 0; i < 10; i++) {
+        printf("%-10d %-16d %-12d %-15d\n", i + 1, A[i], B[i], C[i]);
     }
+
+    printf("=============================================================\n");
 }
 
-void tiendaTikiTaka() 
-{
-    cout << "Ejecutando: Tienda tiki taka\n";
-   float n, v, T1 = 0, T2 = 0, T3 = 0, TT = 0;
-    int cn = 0, A = 0, B = 0, C = 0;
+void tiendaTikiTaka() {
+    int totalVentas, ventasProcesadas = 0, ventasMayor1000 = 0, ventas500a1000 = 0, ventasMenor500 = 0;
+    float montoVenta, totalMayor1000 = 0, total500a1000 = 0, totalMenor500 = 0, totalGlobal = 0;
 
-    printf("Equipo Umizumi");
+    printf("Ingrese el numero total de ventas realizadas: ");
+    scanf("%d", &totalVentas);
 
-    printf("\nIngrese el numero total de ventas realizadas: ");
-    scanf("%f", &n);
+    while (ventasProcesadas < totalVentas) {
+        printf("Ingrese el monto de la venta #%d: $", ventasProcesadas + 1);
+        scanf("%f", &montoVenta);
 
-    while (cn < n) 
-    {
-        printf("\nIngrese el monto de la venta #%d: ", cn + 1);
-        scanf("%f", &v);
+        totalGlobal += montoVenta;
 
-        TT = v + 1; 
-
-        if (v > 1000) 
-        {
-            A = A + 1;
-            T1 = v + 1; 
-        } 
-        else if (v > 500 && v <= 1000) 
-        {
-            B = B + 1;
-            T2 = v + 1; 
-        } 
-        else 
-        {
-            C = C + 1;
-            T3 = v + 1; 
+        if (montoVenta > 1000) {
+            ventasMayor1000++;
+            totalMayor1000 += montoVenta;
+        } else if (montoVenta > 500 && montoVenta <= 1000) {
+            ventas500a1000++;
+            total500a1000 += montoVenta;
+        } else {
+            ventasMenor500++;
+            totalMenor500 += montoVenta;
         }
-        cn = cn + 1;
+
+        ventasProcesadas++;
     }
-    printf("\nResultados del dia:\n");
-    printf("\nVentas totales de Ventas 1: %d, la venta en total vendria siendo: %.2f", A, T1);
-    printf("\nVentas totales de Ventas 2: %d, la venta en total vendria siendo: %.2f", B, T2);
-    printf("\nVentas totales de Ventas 3: %d, la venta en total vendria siendo: %.2f", C, T3);
-    printf("\nTotal de ventas: %.2f\n", TT);
+
+    cout << YELLOW << "\nResultados del Dia\n\n" << RESET;
+
+    cout << "Categoria                  Ventas   Monto Total" << "\n\n";
+
+    cout << "Mayores a $1000            " << left << setw(9) << ventasMayor1000 << "$" << fixed << setprecision(2) << setw(11) << totalMayor1000 << endl;
+    cout << "Entre $501 y $1000         " << left << setw(9) << ventas500a1000  << "$" << fixed << setprecision(2) << setw(11) << total500a1000  << endl;
+    cout << "Menores o iguales a $500   " << left << setw(9) << ventasMenor500  << "$" << fixed << setprecision(2) << setw(11) << totalMenor500  << "\n\n";
+
+    cout << GREEN << "Total en ventas del dia:   " << left << setw(9) << ' ' << "$" << fixed << setprecision(2) << setw(10) << totalGlobal  << RESET << endl;
 }
 
-void empresaBigOld() 
-{
-    cout << "Ejecutando: Empresa big old\n";
-    int n, i, j, k[100][6], TK[100] = {0};
-    char nc[100][50];
-
-    printf("Equipo Umizumi");
+void empresaBigOld() {
+    int numChoferes, i, j, kilometrosPorDia[100][6], totalKilometrosPorChofer[100] = {0};
+    char nombreChofer[100][50];
 
     printf("\nIngresa el numero de choferes: ");
-    scanf("%d", &n);
+    scanf("%d", &numChoferes);
 
-    for (i = 0; i < n; i++)
-    {
-        printf("\nIngrese el nombre del chofer #%d: ", i + 1);
-        scanf("%[^\n]", nc[i]);
+    // Consumir el salto de línea residual en el buffer
+    getchar();
 
-        printf("\nIngrese los km que se han recorrido por dia para %s: \n", nc[i]);
-        for ( j = 0; j < 6; j++)
-        {
-            printf("Dia %d: ", j+1);
-            scanf("%d", &k[i][j]);
-            TK[i] = TK[i] + k[i][j];
+    for (i = 0; i < numChoferes; i++) {
+        printf("Ingrese el nombre del chofer #%d: ", i + 1);
+        // Lectura del nombre completo del chofer
+        fgets(nombreChofer[i], sizeof(nombreChofer[i]), stdin);
+        // Eliminar el salto de línea que fgets puede dejar en el nombre
+        nombreChofer[i][strcspn(nombreChofer[i], "\n")] = 0;
+
+        printf("\nIngrese los kilometros que %s ha recorrido: \n", nombreChofer[i]);
+        for (j = 0; j < 6; j++) {
+            printf("Dia %d: ", j + 1);
+            scanf("%d", &kilometrosPorDia[i][j]);
+        }
+
+        // Sumar los kilómetros recorridos durante la semana
+        for (j = 0; j < 6; j++) {
+            totalKilometrosPorChofer[i] += kilometrosPorDia[i][j];
         }
     }
-    printf("\nREPORTE DE KILOMETROS QUE SE HAN RECORRIDO\n");
-    printf("=================================\n");
-    for ( i = 0; i < n; i++)
-    {
-        printf("Chofer: %s\n", nc[i]);
-        printf("Kilometros por dia: ");
-        for ( j = 0; j < 6; j++)
-        {
-            printf("%d ", k[i][j]);
+
+    // Imprimir el reporte de manera estructurada
+    printf("\n%sREPORTE DE KILOMETROS QUE SE HAN RECORRIDO%s\n", "\033[1m", "\033[0m");
+
+    // Encabezados de la tabla
+    printf("%-15s%-8s%-8s%-8s%-8s%-8s%-8s%s%-8s%s\n", "Chofer", "Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", GREEN, "Total", RESET);
+
+    for (i = 0; i < numChoferes; i++) {
+        printf("%-15s", nombreChofer[i]);
+        // Imprimir kilómetros recorridos cada día
+        for (j = 0; j < 6; j++) {
+            printf("%-8d", kilometrosPorDia[i][j]);
         }
-        printf("\nTotal de kilometros: %d\n", TK[i]);
-        printf("---------------------------------\n");
+        // Imprimir el total de kilómetros del chofer
+        printf("%s%-8d%s\n", GREEN, totalKilometrosPorChofer[i], RESET);
+    }
+}
+
+void llenarMatrizAleatoria(int **matriz, int filas, int columnas) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matriz[i][j] = rand() % 10; // Valores aleatorios entre 0 y 9
+        }
+    }
+}
+
+void llenarMatrizManual(int **matriz, string alias, int filas, int columnas) {
+    cout << "Introduce los valores para la matriz " << alias << ":" << endl;
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            cout << "Elemento en [" << i << "][" << j << "]: ";
+            cin >> matriz[i][j];
+        }
+    }
+}
+
+void mostrarMatriz(int **matriz, int filas, int columnas) {
+    // Calcular el ancho necesario para los delimitadores
+    int width = 2; // El ancho de cada celda (puedes ajustarlo si deseas más espacio)
+    // Delimitador superior
+    cout << "+";
+    for (int i = 0; i < columnas; i++) {
+        for (int j = 0; j <= width; j++) {
+            cout << "-"; // Genera el guion para llenar el ancho completo
+        }
+        cout << "+";
+    }
+    cout << endl;
+    // Mostrar las filas de la matriz
+    for (int i = 0; i < filas; i++) {
+        cout << "|";
+        for (int j = 0; j < columnas; j++) {
+            cout << setw(width) << setfill(' ') << matriz[i][j] << " |"; // Ajuste con espaciado
+        }
+        cout << endl;
+        cout << "+";
+        for (int j = 0; j < columnas; j++) {
+            for (int k = 0; k <= width; k++) {
+                cout << "-"; // Genera el guion para llenar el ancho completo
+            }
+            cout << "+";
+        }
+        cout << endl;
+    }
+}
+
+void sumarMatrices(int **matrizA, int **matrizB, int **resultado, int filas, int columnas) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            resultado[i][j] = matrizA[i][j] + matrizB[i][j];
+        }
     }
 }
 
@@ -517,9 +581,9 @@ void sumaMatrices() {
     cin >> columnas;
 
     // Crear las matrices
-    int** matrizA = new int*[filas];
-    int** matrizB = new int*[filas];
-    int** resultado = new int*[filas];
+    int **matrizA = new int *[filas];
+    int **matrizB = new int *[filas];
+    int **resultado = new int *[filas];
     for (int i = 0; i < filas; i++) {
         matrizA[i] = new int[columnas];
         matrizB[i] = new int[columnas];
@@ -532,7 +596,7 @@ void sumaMatrices() {
         cin >> opcion;
     } while (opcion != 1 && opcion != 2);
 
-    if (opcion == 1 ) {
+    if (opcion == 1) {
         llenarMatrizAleatoria(matrizA, filas, columnas);
         llenarMatrizAleatoria(matrizB, filas, columnas);
     } else {
