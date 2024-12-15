@@ -7,7 +7,7 @@
 | Filename           | main.cpp                           |
 | Team members       | Juan Pablo Hernandez Ramirez       |
 |                    | Contreras Palacios Fernando Andres |
-|                    | Jorge Alberto montes cruz          |
+|                    | Roberto Ruvalcaba Ventura          |
 |                    | Venegas Cons Aida Montserrat       |
 | Date               | 2024-10-31                         |
 | Version            | 1.0.0                              |
@@ -15,16 +15,16 @@
 +--------------------+------------------------------------+
 */
 
-#include <stdio.h>
-#include <cstdlib>
 #include <cmath>
-#include <map>
-#include <string>
-#include <iostream>
-#include <iomanip>
+#include <cstdlib>
 #include <functional>
-#include <vector>
+#include <iomanip>
+#include <iostream>
+#include <map>
 #include <stdexcept>
+#include <stdio.h>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -66,10 +66,10 @@ int main() {
 void header() {
     system("CLS"); // limpiar consola
     cout << GREEN << BOLD << "Programa No. 1" << RESET << endl;
-    cout << GREEN <<"Equipo Umizoomi, lista de integrantes:" << RESET << endl;
+    cout << GREEN << "Equipo Umizoomi, lista de integrantes:" << RESET << endl;
     cout << "-" << YELLOW << " (PM) " << RESET << "Hernandez Ramirez Juan Pablo " << endl;
     cout << "- Contreras Palacios Fernando Andres" << endl;
-    cout << "- Jorge Alberto montes cruz" << endl;
+    cout << "- Roberto Ruvalcaba Ventura" << endl;
     cout << "- Venegas Cons Aida Montserrat" << "\n";
 }
 
@@ -92,6 +92,7 @@ void handleOption(int opcion, const map<int, pair<string, function<void()>>> &op
     } else {
         printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
         opciones.at(opcion).second(); // Ejecuta la función asociada
+        cout << "\n";
     }
 }
 
@@ -123,8 +124,8 @@ void menu() {
 
         cin >> opcion;
 
-        system("CLS");   // Limpiar pantalla nuevamente
-        header();    // Reimprimir header
+        system("CLS"); // Limpiar pantalla nuevamente
+        header();      // Reimprimir header
         cout << "\n";
 
         handleOption(opcion, opciones, 8);
@@ -139,36 +140,32 @@ void tablaDepreciacion() {
     int depreciacion_acum = 0;
 
     cout << left;
-    cout << setw(6) << "Anio"
-              << setw(15) << "Depreciacion"
-              << setw(25) << "Valor al final del anio"
-              << "Depreciacion acumulada\n";
-    cout << "---------------------------------------------------------------\n";
-
+    cout << setw(7) << "Anio" << setw(15) << "Depreciacion" << setw(26) << "Valor al final del anio"
+         << "Depreciacion acumulada\n";
+    cout << "----------------------------------------------------------------------\n";
 
     for (int anio = 1; anio <= num_anio; ++anio) {
         depreciacion_acum += depreciacion_anual;
         costo_final = costo_incial - depreciacion_acum;
 
-
-        cout << setw(6) << anio                          // Columna Año
-                  << setw(15) << depreciacion_anual           // Columna Depreciación
-                  << setw(25) << costo_final                  // Columna Valor al final del año
-                  << depreciacion_acum << "\n";                   // Columna Depreciación acumulada
+        cout << setw(7) << anio                // Columna Año
+             << setw(15) << depreciacion_anual // Columna Depreciación
+             << setw(26) << costo_final        // Columna Valor al final del año
+             << depreciacion_acum << "\n";     // Columna Depreciación acumulada
     }
 }
 
 void pelotaLanzada() {
-    const float CONVERSION=0.44704, GRAVEDAD=9.81; //medida de conversion de millas/h a mts/s y valor de la gravedad
+    const float CONVERSION = 0.44704, GRAVEDAD = 9.81; // medida de conversion de millas/h a mts/s y valor de la gravedad
     float metros, altura, millas, angulo;
-    printf("\nDame la velocidad en millas/hora: ");
+    printf("Dame la velocidad en millas/hora: ");
     scanf("%f", &millas);
-    printf("\nDame el angulo: ");
+    printf("Dame el angulo: ");
     scanf("%f", &angulo);
-    metros= millas*CONVERSION;//se convierte la medida de millas a mts para hacer el calculo
-    angulo = angulo * M_PI / 180; //Conversión de grados a radianes
-    altura = pow(metros * sin(angulo), 2) / (2 * GRAVEDAD);//formula para calcular alt maxima
-    printf("\nLa altura maxima alcanzada es: %.2f metros", altura);
+    metros = millas * CONVERSION;                           // se convierte la medida de millas a mts para hacer el calculo
+    angulo = angulo * M_PI / 180;                           // Conversión de grados a radianes
+    altura = pow(metros * sin(angulo), 2) / (2 * GRAVEDAD); // formula para calcular alt maxima
+    printf("%sLa altura maxima alcanzada por la pelota es de: %.2f metros%s\n", YELLOW, altura, RESET);
 }
 
 void escaleraEdificio() {
@@ -177,47 +174,45 @@ void escaleraEdificio() {
     const double longitud_escalera_2 = 25;
     const double angulo_2 = 85;
 
-    double angulo_1_radianes = angulo_1 * PI/ 180.0;
-    double angulo_2_radianes = angulo_2 * PI/ 180.0;
+    double angulo_1_radianes = angulo_1 * PI / 180.0;
+    double angulo_2_radianes = angulo_2 * PI / 180.0;
 
     double altura_1 = longitud_escalera_1 * sin(angulo_1_radianes);
     double altura_2 = longitud_escalera_2 * sin(angulo_2_radianes);
 
-    cout << "Altura alcanzada por la escalera de " << longitud_escalera_1
-    <<" Pies colocada en una angulo de " <<angulo_1 << "grados: "
-    << altura_1 << " pies " << endl;
+    // Encabezado de la tabla
+    cout << left << setw(11) << "Longitud" << setw(9) << "Angulo" << setw(18) << "Altura Alcanzada" << endl;
+    cout << "------------------------------------" << endl;
 
-        cout << "Altura alcanzada por la escalera de " << longitud_escalera_2
-    <<" Pies colocada en una angulo de " <<angulo_2 << "grados: "
-    << altura_2 << " pies " << endl;
+    // Filas de la tabla
+    cout << left << setw(11) << longitud_escalera_1 << setw(9) << angulo_1 << setw(18) << fixed << setprecision(2) << altura_1 << endl;
+
+    cout << left << setw(11) << longitud_escalera_2 << setw(9) << angulo_2 << setw(18) << fixed << setprecision(2) << altura_2 << endl;
 }
 
 void pelotaGolf() {
-    const float g = 32.0; // gravedad en pies/s^2
+    const float g = 32.0; // Gravedad en pies/s^2
     const int tiempo_total = 10;
     float dist_ant, dist_total, dist_inter;
-    // header de la tabla
-    cout << "\n==========================================================================" << endl;
-    cout << setw(8) << "Tiempo"
-              << setw(33) << "Distancia en el intervalo"
-              << setw(28) << "Distancia total (pies)" << endl;
-    cout << "==========================================================================" << endl;
+
+    // Encabezado de la tabla
+    cout << left << setw(9) << "Tiempo" << setw(17) << "Intervalo (ft)" << setw(15) << "Distancia (ft)" << endl;
+    cout << "----------------------------------------" << endl;
+
     dist_ant = 0.0;
 
-    // for para repetir por cada segundo
+    // Bucle para calcular y mostrar los datos por segundo
     for (int t = 0; t <= tiempo_total; ++t) {
-        // Formula dist
+        // Fórmula para calcular la distancia total
         dist_total = 0.5 * g * t * t;
 
-        // Calcular la distancia recorrida del inter actual
+        // Calcular la distancia recorrida en el intervalo actual
         dist_inter = dist_total - dist_ant;
 
-        // Mostrar resultados en la tabla
-        cout << setw(6) << t
-                  << setw(22) << dist_inter
-                  << setw(28) << dist_total << endl;
+        // Mostrar los resultados en formato de tabla
+        cout << left << setw(9) << t << setw(17) << fixed << setprecision(2) << dist_inter << setw(15) << fixed << setprecision(2) << dist_total << endl;
 
-        // Se actualiza la dist para el nuevo intervalo (se van sumando)
+        // Actualizar la distancia anterior
         dist_ant = dist_total;
     }
 }
@@ -259,9 +254,8 @@ int cuadrante() {
     try {
         float angulo = obtenerAngulo();
         string resultado = determinarCuadrante(angulo);
-        cout << "El punto con angulo " << angulo << " se encuentra "
-             << YELLOW << resultado << RESET << "." << endl;
-    } catch (const exception& e) {
+        cout << YELLOW << "El punto con angulo " << angulo << " se encuentra " << YELLOW << resultado << "." << RESET << endl;
+    } catch (const exception &e) {
         cerr << "Error: " << e.what() << endl;
         return 1; // Indicar fallo en la ejecucion
     }
@@ -276,16 +270,16 @@ void ecuacion() {
     cout << "Dame el valor de x: ";
     cin >> x;
 
-    // Calcular el valor de y con la fórmula
+    // Calcular el valor de y con la fórmula2
     y = (pow(x, 2) - 4) / 2 + (3 * x - 7 * pow(x, 4)) / (-5 * pow(x, 3)) + 4 * x - 2;
 
     // Mostrar el resultado desde el inicio
-    cout << "El resultado de la ecuacion con x = " << x << " es: " << y << endl;
+    cout << YELLOW "El resultado de la ecuacion con x = " << x << " es: " << y << RESET << endl;
 
     // Mostrar la fórmula visualmente
     cout << "\n" << left;
     cout << setw(4) << "    " << setw(9) << " x^2 - 4 " << setw(3) << "" << setw(11) << " 3x - 7x^4 " << endl;
-    cout << setw(4) << "y = " << setw(9) << "---------" <<  " + "  << "" << setw(11) << "-----------" << endl;
+    cout << setw(4) << "y = " << setw(9) << "---------" << " + " << "" << setw(11) << "-----------" << endl;
     cout << setw(4) << "    " << setw(9) << "    2    " << setw(3) << "" << setw(11) << "   -5x^3   " << endl;
     cout << "\n";
 
@@ -296,21 +290,21 @@ void ecuacion() {
     cout << BOLD "Paso 1: Calcular la primera fraccion:" << RESET << endl;
     cout << "( x^2 - 4 ) / 2 = ( " << x << "^2 - 4 ) / 2" << endl;
     cout << "( " << pow(x, 2) << " - 4 ) / 2 = " << parte1 << endl;
-    cout << endl;
+    cout << "\n";
 
     // Paso 2: Calcular la segunda fracción
     float parte2 = (3 * x - 7 * pow(x, 4)) / (-5 * pow(x, 3));
     cout << BOLD "Paso 2: Calcular la segunda fraccion:" << RESET << endl;
     cout << "( 3x - 7x^4 ) / ( -5x^3 ) = ( 3 * " << x << " - 7 * " << x << "^4 ) / ( -5 * " << x << "^3 )" << endl;
     cout << "( " << 3 * x << " - " << 7 * pow(x, 4) << " ) / ( " << -5 * pow(x, 3) << " ) = " << parte2 << endl;
-    cout << endl;
+    cout << "\n";
 
     // Paso 3: Calcular el término restante
     float parte3 = 4 * x - 2;
     cout << BOLD "Paso 3: Calcular el termino restante:" << RESET << endl;
     cout << "4x - 2 = 4 * " << x << " - 2" << endl;
     cout << "4 * " << x << " - 2 = " << parte3 << endl;
-    cout << endl;
+    cout << "\n";
 
     // Paso 4: Sumar todas las partes
     y = parte1 + parte2 + parte3;
@@ -327,7 +321,7 @@ void trianguloLetras() {
         for (size_t j = 0; j < vec.size() - i; j++) {
             cout << vec[j] << " ";
         }
-        cout << endl;
+        cout << "\n";
     }
 }
 

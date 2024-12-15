@@ -13,7 +13,7 @@ void beAwesome() {
 
 int main() {
 
-    while (alive) {
+    while(alive) {
         beAwesome();
         sleep(1);
     }
