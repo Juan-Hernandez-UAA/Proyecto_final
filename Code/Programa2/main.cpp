@@ -173,30 +173,54 @@ void oficinaAgua() {
     }
 }
 
+template <typename T>
+bool validarCaracter(const string &input, T &caracterValido, const string &mensajeError, const string &caracteresValidos) {
+    if (input.length() != 1) {
+        printError(mensajeError);
+        return false;
+    }
+    char caracter = toupper(input[0]);
+    if (caracteresValidos.find(caracter) == string::npos) {
+        printError(mensajeError);
+        return false;
+    }
+    caracterValido = caracter;
+    return true;
+}
+
 int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, int edadMaxima) {
     int edad;
     float estatura;
+    string input;
     char estadoCivil;
 
-    cout << "Ingrese la estado civil: ";
-    cin >> estadoCivil;
-    estadoCivil = toupper(estadoCivil);
-    if (estadoCivil != estadoCivilValido) {
-        cout << YELLOW << "El aspirante no es valido, debe estar soltero" << RESET << endl;
-        return 1;
-    }
+    // Validación del estado civil
+    do {
+        cout << "Ingrese el estado civil: Soltero(S), Viudo(V), Casado(C), Divorciado(D): ";
+        cin >> input;
+        if (!validarCaracter(input, estadoCivil, "Debe ingresar solo un caracter (S, V, C o D)", "SVCD")) {
+            continue;
+        }
+        if (estadoCivil != estadoCivilValido) {
+            cout << YELLOW << "El aspirante no es apto, debe estar soltero (S)" << RESET << endl;
+            return 1;
+        }
+        break;
+    } while (true);
 
+    // Validación de la edad
     cout << "Ingrese la edad: ";
     cin >> edad;
     if (edad < edadMinima || edad > edadMaxima) {
-        cout << YELLOW << "El aspirante no es valido, debe tener entre " << edadMinima << " y " << edadMaxima << " anios" << RESET << endl;
+        cout << YELLOW << "El aspirante no es apto, debe tener entre " << edadMinima << " y " << edadMaxima << " anios" << RESET << endl;
         return 1;
     }
 
+    // Validación de la estatura
     cout << "Ingrese la estatura en metros: ";
     cin >> estatura;
     if (estatura <= estaturaMinima) {
-        cout << YELLOW << "La estatura minima es: " << estaturaMinima + 0.01 << " metros" << RESET << endl;
+        cout << YELLOW << "El aspirante no es apto. La estatura minima es: " << estaturaMinima + 0.01 << " metros" << RESET << endl;
         return 1;
     }
 
@@ -208,36 +232,39 @@ int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, 
 void oficinaEjercito() {
     bool esGeneroValido = true;
     char sexo, continuar;
+    string input;
 
     do {
-
         do {
-
             cout << "Ingrese el sexo: Femenino(F) Masculino(M): ";
-            cin >> sexo;
-            sexo = toupper(sexo);
-
-            if (sexo != 'F' && sexo != 'M') {
-                printError("Sexo invalido, intente de nuevo");
+            cin >> input;
+            if (!validarCaracter(input, sexo, "Debe ingresar solo un caracter (F o M)", "FM")) {
                 esGeneroValido = false;
-            } else {
-                esGeneroValido = true;
+                continue;
             }
-
+            esGeneroValido = true;
         } while (!esGeneroValido);
 
-        if (sexo == 'F')
+        // Definir parámetros de validación para cada género
+        if (sexo == 'F') {
             validarSujeto('S', 1.60, 20, 25);
-        else
+        } else {
             validarSujeto('S', 1.65, 18, 24);
+        }
 
         cout << "Desea realizar otra validacion? (s/n): ";
-        cin >> continuar;
-        continuar = toupper(continuar);
+        cin >> input;
+        if (!validarCaracter(input, continuar, "Debe ingresar solo un caracter (S o N)", "SN")) {
+            continuar = 'N'; // Salir si la entrada es inválida
+        }
+
         cout << "\n";
 
     } while (continuar == 'S');
 }
+
+
+
 
 void numeroBase10() {
 
