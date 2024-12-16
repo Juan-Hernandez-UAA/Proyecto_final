@@ -354,7 +354,7 @@ void encuestaMoviles() {
         cin >> alumnos;
 
         if (alumnos <= 0) {
-            cout << "El numero de alumnos debe ser mayor a 0";
+            cout << "El numero de alumnos debe ser mayor a 0" << endl;
         }
 
     } while (alumnos <= 0);
@@ -375,7 +375,18 @@ void encuestaMoviles() {
         contador++;
     }
 
-    cout << "La plataforma ganadora es: " << (votosAndroid > votosIos ? "Android con " + to_string(votosAndroid) + " votos" : "iOS con " + to_string(votosIos) + " votos") << endl;
+    // Mostrar resultados y manejar empate
+    cout << "Resultados de la encuesta:" << endl;
+    cout << "Votos Android: " << votosAndroid << endl;
+    cout << "Votos iOS: " << votosIos << endl;
+
+    if (votosAndroid == votosIos) {
+        cout << "La encuesta terminó en empate. Por favor, vuelva a realizarla." << endl;
+    } else if (votosAndroid > votosIos) {
+        cout << "Android es el sistema preferido." << endl;
+    } else {
+        cout << "iOS es el sistema preferido." << endl;
+    }
 }
 
 
