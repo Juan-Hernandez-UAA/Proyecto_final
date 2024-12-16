@@ -33,7 +33,6 @@ using namespace std;
 // Definicion de colores para consola
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
-
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
@@ -41,6 +40,7 @@ using namespace std;
 #define PINK "\033[35m"
 #define CYAN "\033[36m"
 
+// Prototipos de funciones no moduladas
 void elCometa();
 void sueldoEmpleados();
 void elMandilon();
@@ -51,12 +51,20 @@ void empresaBigOld();
 void sumaMatrices();
 void salir();
 
+// Prototipos de funciones para la suma de matrices
+void sumaMatrices();
+void llenarMatrizAleatoria(int **matriz, int filas, int columnas);
+void llenarMatrizManual(int **matriz, string alias, int filas, int columnas);
+void mostrarMatriz(int **matriz, int filas, int columnas);
+void sumarMatrices(int **matrizA, int **matrizB, int **resultado, int filas, int columnas);
+
+// Prototipos de funciones para el menu
+void header();
+void menu();
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
 void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir);
 void printInfo(const string &message);
 void printError(const string &message);
-void menu();
-void header();
 
 int main() {
     header();
@@ -71,6 +79,35 @@ void header() {
     cout << "- Contreras Palacios Fernando Andres" << endl;
     cout << "- Roberto Ruvalcaba Ventura" << endl;
     cout << "- Venegas Cons Aida Montserrat" << "\n";
+}
+
+void menu() {
+    int opcion = -1;
+
+    // Mapa de opciones con texto y funciones
+    map<int, pair<string, function<void()>>> opciones = {
+        {1, {"El cometa", elCometa}},
+        {2, {"Sueldo empleados", sueldoEmpleados}},
+        {3, {"El mandilon", elMandilon}},
+        {4, {"Suma vectores", sumaVectores}},
+        {5, {"Generando tercer vector", tercerVector}},
+        {6, {"Tienda tiki taka", tiendaTikiTaka}},
+        {7, {"Empresa big old", empresaBigOld}},
+        {8, {"Suma matrices", sumaMatrices}},
+        {9, {"Salir", salir}}
+    };
+
+    do {
+        displayMenu(opciones);
+
+        cin >> opcion;
+
+        system("CLS"); // Limpiar pantalla nuevamente
+        header();      // Reimprimir header
+        cout << "\n";
+
+        handleOption(opcion, opciones, 9);
+    } while (opcion != 9);
 }
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
@@ -103,36 +140,6 @@ void printError(const string &message) {
     cout << RED << "[ERROR]: " << message << "\n" << RESET;
 }
 
-void menu() {
-    int opcion = -1;
-
-    // Mapa de opciones con texto y funciones
-    map<int, pair<string, function<void()>>> opciones = {
-        {1, {"El cometa", elCometa}},
-        {2, {"Sueldo empleados", sueldoEmpleados}},
-        {3, {"El mandilon", elMandilon}},
-        {4, {"Suma vectores", sumaVectores}},
-        {5, {"Generando tercer vector", tercerVector}},
-        {6, {"Tienda tiki taka", tiendaTikiTaka}},
-        {7, {"Empresa big old", empresaBigOld}},
-        {8, {"Suma matrices", sumaMatrices}},
-        {9, {"Salir", salir}}
-    };
-
-    do {
-        displayMenu(opciones);
-
-        cin >> opcion;
-
-        system("CLS"); // Limpiar pantalla nuevamente
-        header();      // Reimprimir header
-        cout << "\n";
-
-        handleOption(opcion, opciones, 9);
-    } while (opcion != 9);
-}
-
-// ----- Funciones principales
 void elCometa() {
     int clave;
     float costoMateriaPrima, costoManoObra, gastosFabricacion, costoProduccion, precioVenta;
@@ -518,62 +525,6 @@ void empresaBigOld() {
     }
 }
 
-void llenarMatrizAleatoria(int **matriz, int filas, int columnas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            matriz[i][j] = rand() % 10; // Valores aleatorios entre 0 y 9
-        }
-    }
-}
-
-void llenarMatrizManual(int **matriz, string alias, int filas, int columnas) {
-    cout << "Introduce los valores para la matriz " << alias << ":" << endl;
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            cout << "Elemento en [" << i << "][" << j << "]: ";
-            cin >> matriz[i][j];
-        }
-    }
-}
-
-void mostrarMatriz(int **matriz, int filas, int columnas) {
-    // Calcular el ancho necesario para los delimitadores
-    int width = 2; // El ancho de cada celda (puedes ajustarlo si deseas más espacio)
-    // Delimitador superior
-    cout << "+";
-    for (int i = 0; i < columnas; i++) {
-        for (int j = 0; j <= width; j++) {
-            cout << "-"; // Genera el guion para llenar el ancho completo
-        }
-        cout << "+";
-    }
-    cout << endl;
-    // Mostrar las filas de la matriz
-    for (int i = 0; i < filas; i++) {
-        cout << "|";
-        for (int j = 0; j < columnas; j++) {
-            cout << setw(width) << setfill(' ') << matriz[i][j] << " |"; // Ajuste con espaciado
-        }
-        cout << endl;
-        cout << "+";
-        for (int j = 0; j < columnas; j++) {
-            for (int k = 0; k <= width; k++) {
-                cout << "-"; // Genera el guion para llenar el ancho completo
-            }
-            cout << "+";
-        }
-        cout << endl;
-    }
-}
-
-void sumarMatrices(int **matrizA, int **matrizB, int **resultado, int filas, int columnas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            resultado[i][j] = matrizA[i][j] + matrizB[i][j];
-        }
-    }
-}
-
 void sumaMatrices() {
     srand(time(0)); // Semilla para la generación de números aleatorios
 
@@ -630,6 +581,60 @@ void sumaMatrices() {
     delete[] resultado;
 }
 
-void salir() {
-    cout << "Saliendo del programa...\n";
+void llenarMatrizAleatoria(int **matriz, int filas, int columnas) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matriz[i][j] = rand() % 10; // Valores aleatorios entre 0 y 9
+        }
+    }
 }
+
+void llenarMatrizManual(int **matriz, string alias, int filas, int columnas) {
+    cout << "Introduce los valores para la matriz " << alias << ":" << endl;
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            cout << "Elemento en [" << i << "][" << j << "]: ";
+            cin >> matriz[i][j];
+        }
+    }
+}
+
+void mostrarMatriz(int **matriz, int filas, int columnas) {
+    // Calcular el ancho necesario para los delimitadores
+    int width = 2; // El ancho de cada celda (puedes ajustarlo si deseas más espacio)
+    // Delimitador superior
+    cout << "+";
+    for (int i = 0; i < columnas; i++) {
+        for (int j = 0; j <= width; j++) {
+            cout << "-"; // Genera el guion para llenar el ancho completo
+        }
+        cout << "+";
+    }
+    cout << endl;
+    // Mostrar las filas de la matriz
+    for (int i = 0; i < filas; i++) {
+        cout << "|";
+        for (int j = 0; j < columnas; j++) {
+            cout << setw(width) << setfill(' ') << matriz[i][j] << " |"; // Ajuste con espaciado
+        }
+        cout << endl;
+        cout << "+";
+        for (int j = 0; j < columnas; j++) {
+            for (int k = 0; k <= width; k++) {
+                cout << "-"; // Genera el guion para llenar el ancho completo
+            }
+            cout << "+";
+        }
+        cout << endl;
+    }
+}
+
+void sumarMatrices(int **matrizA, int **matrizB, int **resultado, int filas, int columnas) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            resultado[i][j] = matrizA[i][j] + matrizB[i][j];
+        }
+    }
+}
+
+void salir() {}
