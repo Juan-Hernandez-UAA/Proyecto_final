@@ -492,6 +492,9 @@ void empresaBigOld() {
             scanf("%d", &kilometrosPorDia[i][j]);
         }
 
+        // Consumir el salto de línea residual en el buffer antes de volver al bucle
+        getchar();
+
         // Sumar los kilómetros recorridos durante la semana
         for (j = 0; j < 6; j++) {
             totalKilometrosPorChofer[i] += kilometrosPorDia[i][j];
