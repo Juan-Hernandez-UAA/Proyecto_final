@@ -28,12 +28,9 @@
 
 using namespace std;
 
-#define PI 3.14159265358979323846
-
 // Definicion de colores para consola
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
-
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
@@ -41,8 +38,9 @@ using namespace std;
 #define PINK "\033[35m"
 #define CYAN "\033[36m"
 
-// Prototipos de funciones
-int cuadrante();
+#define PI 3.14159265358979323846
+
+// Prototipos de funciones no moduladas
 void tablaDepreciacion();
 void pelotaLanzada();
 void escaleraEdificio();
@@ -51,12 +49,19 @@ void ecuacion();
 void trianguloLetras();
 void salir();
 
+// Prototipos de funciones para el calculo del cuadrante
+int cuadrante();
+float obtenerAngulo();
+string determinarCuadrante(float angulo);
+
+// Prototipos de funciones para el menu
+void header();
+void menu();
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
 void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir);
 void printInfo(const string &message);
 void printError(const string &message);
-void menu();
-void header();
+
 
 int main() {
     header();
@@ -71,6 +76,34 @@ void header() {
     cout << "- Contreras Palacios Fernando Andres" << endl;
     cout << "- Roberto Ruvalcaba Ventura" << endl;
     cout << "- Venegas Cons Aida Montserrat" << "\n";
+}
+
+void menu() {
+    int opcion = -1;
+
+    // Mapa de opciones con texto y funciones
+    map<int, pair<string, function<void()>>> opciones = {
+        {1, {"Tabla de depreciacion", tablaDepreciacion}},
+        {2, {"Pelota lanzada", pelotaLanzada}},
+        {3, {"Escalera en un edificio", escaleraEdificio}},
+        {4, {"Pelota de golf", pelotaGolf}},
+        {5, {"Cuadrante", cuadrante}},
+        {6, {"Ecuacion", ecuacion}},
+        {7, {"Triangulo con letras", trianguloLetras}},
+        {8, {"Salir", salir}}
+    };
+
+    do {
+        displayMenu(opciones);
+
+        cin >> opcion;
+
+        system("CLS"); // Limpiar pantalla nuevamente
+        header();      // Reimprimir header
+        cout << "\n";
+
+        handleOption(opcion, opciones, 8);
+    } while (opcion != 8);
 }
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
@@ -102,34 +135,6 @@ void printInfo(const string &message) {
 
 void printError(const string &message) {
     cout << RED << "[ERROR]: " << message << "\n" << RESET;
-}
-
-void menu() {
-    int opcion = -1;
-
-    // Mapa de opciones con texto y funciones
-    map<int, pair<string, function<void()>>> opciones = {
-        {1, {"Tabla de depreciacion", tablaDepreciacion}},
-        {2, {"Pelota lanzada", pelotaLanzada}},
-        {3, {"Escalera en un edificio", escaleraEdificio}},
-        {4, {"Pelota de golf", pelotaGolf}},
-        {5, {"Cuadrante", cuadrante}},
-        {6, {"Ecuacion", ecuacion}},
-        {7, {"Triangulo con letras", trianguloLetras}},
-        {8, {"Salir", salir}}
-    };
-
-    do {
-        displayMenu(opciones);
-
-        cin >> opcion;
-
-        system("CLS"); // Limpiar pantalla nuevamente
-        header();      // Reimprimir header
-        cout << "\n";
-
-        handleOption(opcion, opciones, 8);
-    } while (opcion != 8);
 }
 
 void tablaDepreciacion() {
@@ -217,7 +222,19 @@ void pelotaGolf() {
     }
 }
 
-// Funcion perteneciente a cuadrante
+int cuadrante() {
+    try {
+        float angulo = obtenerAngulo();
+        string resultado = determinarCuadrante(angulo);
+        cout << YELLOW << "El punto con angulo " << angulo << " se encuentra " << YELLOW << resultado << "." << RESET << endl;
+    } catch (const exception &e) {
+        cerr << "Error: " << e.what() << endl;
+        return 1; // Indicar fallo en la ejecucion
+    }
+
+    return 0; // Ejecucion exitosa
+}
+
 float obtenerAngulo() {
     float angulo;
     cout << "Dame el angulo de la linea: ";
@@ -232,7 +249,6 @@ float obtenerAngulo() {
     return angulo;
 }
 
-// Funcion perteneciente a cuadrante
 string determinarCuadrante(float angulo) {
     if (angulo > 0 && angulo < 90) {
         return "en el cuadrante I";
@@ -247,20 +263,6 @@ string determinarCuadrante(float angulo) {
         return "en el cuadrante IV";
     }
     return "en un eje";
-}
-
-// Funcion principal: cuadrante
-int cuadrante() {
-    try {
-        float angulo = obtenerAngulo();
-        string resultado = determinarCuadrante(angulo);
-        cout << YELLOW << "El punto con angulo " << angulo << " se encuentra " << YELLOW << resultado << "." << RESET << endl;
-    } catch (const exception &e) {
-        cerr << "Error: " << e.what() << endl;
-        return 1; // Indicar fallo en la ejecucion
-    }
-
-    return 0; // Ejecucion exitosa
 }
 
 void ecuacion() {

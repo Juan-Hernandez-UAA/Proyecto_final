@@ -15,23 +15,23 @@
 +--------------------+--------------------------------------+
 */
 
-#include <algorithm> // Para std::max_element
-#include <cctype>    // Para funciones como std::toupper
+#include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <cstdlib>
 #include <functional>
 #include <iostream>
 #include <map>
 #include <stdio.h>
-#include <string.h> //Ejercito
+#include <string.h>
 #include <string>
 #include <vector>
 
 using namespace std;
 
+// Definicion de colores para consola
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
-
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
@@ -39,22 +39,31 @@ using namespace std;
 #define PINK "\033[35m"
 #define CYAN "\033[36m"
 
-// Prototipos de funciones
+// Prototipos de funciones no moduladas
 void numeroMayor();
 void oficinaAgua();
-void oficinaEjercito();
 void numeroBase10();
-void mcdMcm();
 void encuestaMoviles();
 void numeroTexto();
 void salir();
 
+// Prototipos de funciones para la oficina del ejercito
+void oficinaEjercito();
+int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, int edadMaxima);
+
+// Prototipos de funciones para calcular el MCD y MCM
+void mcdMcm();
+int calcularMCD(int a, int b);
+int calcularMCM(int a, int b, int mcd);
+
+// Prototipos de funciones para el menu
+void header();
+void menu();
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
 void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir);
 void printInfo(const string &message);
 void printError(const string &message);
-void menu();
-void header();
+
 
 int main() {
     header();
@@ -69,6 +78,33 @@ void header() {
     cout << "- Contreras Palacios Fernando Andres" << endl;
     cout << "- Roberto Ruvalcaba Ventura" << endl;
     cout << "- Venegas Cons Aida Montserrat" << "\n";
+}
+
+void menu() {
+    int opcion = -1;
+
+    map<int, pair<string, function<void()>>> opciones = {
+        {1, {"Numero mayor", numeroMayor}},
+        {2, {"Oficina de agua", oficinaAgua}},
+        {3, {"Oficina del ejercito", oficinaEjercito}},
+        {4, {"Numero base 10", numeroBase10}},
+        {5, {"MCD y MCM", mcdMcm}},
+        {6, {"Encuesta moviles", encuestaMoviles}},
+        {7, {"De numero a texto", numeroTexto}},
+        {8, {"Salir", salir}}
+    };
+
+    do {
+        displayMenu(opciones);
+
+        cin >> opcion;
+
+        system("CLS"); // Limpiar pantalla nuevamente
+        header();      // Reimprimir header
+        cout << "\n";
+
+        handleOption(opcion, opciones, 8);
+    } while (opcion != 8);
 }
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
@@ -101,6 +137,7 @@ void printError(const string &message) {
     cout << RED << "[ERROR]: " << message << "\n" << RESET;
 }
 
+// Funcion para valiar caracteres
 template <typename T>
 bool validarCaracter(const string &input, T &caracterValido, const string &mensajeError, const string &caracteresValidos) {
     if (input.length() != 1) {
@@ -116,32 +153,6 @@ bool validarCaracter(const string &input, T &caracterValido, const string &mensa
     return true;
 }
 
-void menu() {
-    int opcion = -1;
-
-    map<int, pair<string, function<void()>>> opciones = {
-        {1, {"Numero mayor", numeroMayor}},
-        {2, {"Oficina de agua", oficinaAgua}},
-        {3, {"Oficina del ejercito", oficinaEjercito}},
-        {4, {"Numero base 10", numeroBase10}},
-        {5, {"MCD y MCM", mcdMcm}},
-        {6, {"Encuesta moviles", encuestaMoviles}},
-        {7, {"De numero a texto", numeroTexto}},
-        {8, {"Salir", salir}}
-    };
-
-    do {
-        displayMenu(opciones);
-
-        cin >> opcion;
-
-        system("CLS"); // Limpiar pantalla nuevamente
-        header();      // Reimprimir header
-        cout << "\n";
-
-        handleOption(opcion, opciones, 8);
-    } while (opcion != 8);
-}
 void numeroMayor() {
     vector<int> numeros(4);
 
@@ -188,6 +199,40 @@ void oficinaAgua() {
     }
 }
 
+void oficinaEjercito() {
+    bool esGeneroValido = true;
+    char sexo, continuar;
+    string input;
+
+    do {
+        do {
+            cout << "Ingrese el sexo: Femenino(F) Masculino(M): ";
+            cin >> input;
+            if (!validarCaracter(input, sexo, "Debe ingresar solo un caracter (F o M)", "FM")) {
+                esGeneroValido = false;
+                continue;
+            }
+            esGeneroValido = true;
+        } while (!esGeneroValido);
+
+        // Definir parámetros de validación para cada género
+        if (sexo == 'F') {
+            validarSujeto('S', 1.60, 20, 25);
+        } else {
+            validarSujeto('S', 1.65, 18, 24);
+        }
+
+        cout << "Desea realizar otra validacion? (s/n): ";
+        cin >> input;
+        if (!validarCaracter(input, continuar, "Debe ingresar solo un caracter (S o N)", "SN")) {
+            continuar = 'N'; // Salir si la entrada es inválida
+        }
+
+        cout << "\n";
+
+    } while (continuar == 'S');
+}
+
 int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, int edadMaxima) {
     int edad;
     float estatura;
@@ -229,43 +274,6 @@ int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, 
     return 0;
 }
 
-void oficinaEjercito() {
-    bool esGeneroValido = true;
-    char sexo, continuar;
-    string input;
-
-    do {
-        do {
-            cout << "Ingrese el sexo: Femenino(F) Masculino(M): ";
-            cin >> input;
-            if (!validarCaracter(input, sexo, "Debe ingresar solo un caracter (F o M)", "FM")) {
-                esGeneroValido = false;
-                continue;
-            }
-            esGeneroValido = true;
-        } while (!esGeneroValido);
-
-        // Definir parámetros de validación para cada género
-        if (sexo == 'F') {
-            validarSujeto('S', 1.60, 20, 25);
-        } else {
-            validarSujeto('S', 1.65, 18, 24);
-        }
-
-        cout << "Desea realizar otra validacion? (s/n): ";
-        cin >> input;
-        if (!validarCaracter(input, continuar, "Debe ingresar solo un caracter (S o N)", "SN")) {
-            continuar = 'N'; // Salir si la entrada es inválida
-        }
-
-        cout << "\n";
-
-    } while (continuar == 'S');
-}
-
-
-
-
 void numeroBase10() {
 
     int numero, suma = 0, cifras = 0;
@@ -285,21 +293,6 @@ void numeroBase10() {
     } else {
         printf("El numero no es positivo.\n");
     }
-}
-
-// Función para calcular el MCD usando el Algoritmo de Euclides
-
-int calcularMCD(int a, int b) {
-    while (b != 0) {
-        int resto = a % b;
-        a = b;
-        b = resto;
-    }
-    return a;
-}
-
-int calcularMCM(int a, int b, int mcd) {
-    return (a * b) / mcd;
 }
 
 void mcdMcm() {
@@ -340,6 +333,19 @@ void mcdMcm() {
         scanf(" %c", &continuar); // Espacio antes de %c para leer correctamente el carácter
 
     } while (continuar == 's' || continuar == 'S');
+}
+
+int calcularMCD(int a, int b) {
+    while (b != 0) {
+        int resto = a % b;
+        a = b;
+        b = resto;
+    }
+    return a;
+}
+
+int calcularMCM(int a, int b, int mcd) {
+    return (a * b) / mcd;
 }
 
 void encuestaMoviles() {
@@ -389,7 +395,6 @@ void encuestaMoviles() {
     }
 }
 
-
 void numeroTexto() {
     void numeroEnPalabras(int numero);
     int numero;
@@ -419,6 +424,4 @@ void numeroEnPalabras(int numero) {
     }
 }
 
-void salir() {
-    cout << "Saliendo del programa...\n";
-}
+void salir() {}
