@@ -28,7 +28,6 @@ using namespace std;
 // Definicion de colores para consola
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
-
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
@@ -36,6 +35,7 @@ using namespace std;
 #define PINK "\033[35m"
 #define CYAN "\033[36m"
 
+// Prototipos de funciones no moduladas
 void areaFigura();
 void distanciaPuntos();
 void cantidadMayor();
@@ -46,12 +46,13 @@ void naufragoSatisfecho();
 void companiaPaqueteria();
 void salir();
 
+// Prototipos de funciones para el menu
+void header();
+void menu();
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones);
 void handleOption(int opcion, const map<int, pair<string, function<void()>>> &opciones, int opcion_salir);
 void printInfo(const string &message);
 void printError(const string &message);
-void menu();
-void header();
 
 int main() {
     header();
@@ -66,6 +67,35 @@ void header() {
     cout << "- Contreras Palacios Fernando Andres" << endl;
     cout << "- Roberto Ruvalcaba Ventura" << endl;
     cout << "- Venegas Cons Aida Montserrat" << "\n";
+}
+
+void menu() {
+    // Mapa de opciones con texto y funciones
+    map<int, pair<string, function<void()>>> opciones = {
+        {1, {"Area de la figura", areaFigura}},
+        {2, {"Distancia entre dos puntos", distanciaPuntos}},
+        {3, {"Cantidad mayor", cantidadMayor}},
+        {4, {"La langosta ahumada", langostaAhumada}},
+        {5, {"Compania telefonica", companiaTelefonica}},
+        {6, {"Compania de viajes", companiaViajes}},
+        {7, {"Naufrago satisfecho", naufragoSatisfecho}},
+        {8, {"Compania de paqueteria", companiaPaqueteria}},
+        {9, {"Salir", salir}}
+    };
+
+    int opcion = -1;
+
+    do {
+        displayMenu(opciones); // Mostrar el menú
+
+        cin >> opcion;
+
+        system("CLS"); // Limpiar la pantalla después de la selección
+        header();      // Mostrar header personalizado
+        cout << "\n";
+
+        handleOption(opcion, opciones, 9); // Manejar la opción seleccionada
+    } while (opcion != 9); // Repetir el menú hasta que el usuario elija salir
 }
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
@@ -98,36 +128,6 @@ void printError(const string &message) {
     cout << RED << "[ERROR]: " << message << "\n" << RESET;
 }
 
-void menu() {
-    // Mapa de opciones con texto y funciones
-    map<int, pair<string, function<void()>>> opciones = {
-        {1, {"Area de la figura", areaFigura}},
-        {2, {"Distancia entre dos puntos", distanciaPuntos}},
-        {3, {"Cantidad mayor", cantidadMayor}},
-        {4, {"La langosta ahumada", langostaAhumada}},
-        {5, {"Compania telefonica", companiaTelefonica}},
-        {6, {"Compania de viajes", companiaViajes}},
-        {7, {"Naufrago satisfecho", naufragoSatisfecho}},
-        {8, {"Compania de paqueteria", companiaPaqueteria}},
-        {9, {"Salir", salir}}
-    };
-
-    int opcion = -1;
-
-    do {
-        displayMenu(opciones); // Mostrar el menú
-
-        cin >> opcion;
-
-        system("CLS"); // Limpiar la pantalla después de la selección
-        header();      // Mostrar header personalizado
-        cout << "\n";
-
-        handleOption(opcion, opciones, 9); // Manejar la opción seleccionada
-    } while (opcion != 9); // Repetir el menú hasta que el usuario elija salir
-}
-
-// Prototipos adicionales para funciones del conjunto 3
 void areaFigura() {
     printf("\nINICIANDO CALCULADOR DEL AREA....\n");
 
