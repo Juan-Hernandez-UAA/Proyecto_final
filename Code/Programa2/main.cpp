@@ -101,6 +101,21 @@ void printError(const string &message) {
     cout << RED << "[ERROR]: " << message << "\n" << RESET;
 }
 
+template <typename T>
+bool validarCaracter(const string &input, T &caracterValido, const string &mensajeError, const string &caracteresValidos) {
+    if (input.length() != 1) {
+        printError(mensajeError);
+        return false;
+    }
+    char caracter = toupper(input[0]);
+    if (caracteresValidos.find(caracter) == string::npos) {
+        printError(mensajeError);
+        return false;
+    }
+    caracterValido = caracter;
+    return true;
+}
+
 void menu() {
     int opcion = -1;
 
@@ -171,21 +186,6 @@ void oficinaAgua() {
         // Despliegue del resultado
         cout << YELLOW << "El total a pagar es: $" << total_factura << RESET << endl;
     }
-}
-
-template <typename T>
-bool validarCaracter(const string &input, T &caracterValido, const string &mensajeError, const string &caracteresValidos) {
-    if (input.length() != 1) {
-        printError(mensajeError);
-        return false;
-    }
-    char caracter = toupper(input[0]);
-    if (caracteresValidos.find(caracter) == string::npos) {
-        printError(mensajeError);
-        return false;
-    }
-    caracterValido = caracter;
-    return true;
 }
 
 int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, int edadMaxima) {
@@ -347,6 +347,7 @@ void encuestaMoviles() {
     int votosAndroid = 0, votosIos = 0;
     int alumnos;
     char opcion;
+    string input;
 
     do {
         cout << "Alumnos a responder la encuesta: ";
@@ -360,26 +361,23 @@ void encuestaMoviles() {
 
     while (contador < alumnos) {
         cout << "Alumno " << contador + 1 << ", por favor vota por una opcion: Android(A) o iOS(I): ";
-        cin >> opcion;
-        opcion = toupper(opcion);
+        cin >> input;
 
-        header();
-        printInfo("\nEjecutando: Encuesta moviles...");
+        if (!validarCaracter(input, opcion, "Debe ingresar solo un caracter (A o I)", "AI")) {
+            continue;
+        }
 
         if (opcion == 'A') {
             votosAndroid++;
         } else if (opcion == 'I') {
             votosIos++;
-        } else {
-            printError("Opcion no valida, intente de nuevo");
-            contador--;
         }
-
         contador++;
     }
 
-    cout << "la plataforma ganadora es: " << (votosAndroid > votosIos ? "Android con " + to_string(votosAndroid) + " votos" : "iOS con " + to_string(votosIos) + " votos") << endl;
+    cout << "La plataforma ganadora es: " << (votosAndroid > votosIos ? "Android con " + to_string(votosAndroid) + " votos" : "iOS con " + to_string(votosIos) + " votos") << endl;
 }
+
 
 void numeroTexto() {
     void numeroEnPalabras(int numero);
