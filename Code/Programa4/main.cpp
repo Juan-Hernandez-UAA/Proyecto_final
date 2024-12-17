@@ -601,7 +601,7 @@ void llenarMatrizManual(int **matriz, string alias, int filas, int columnas) {
 
 void mostrarMatriz(int **matriz, int filas, int columnas) {
     // Calcular el ancho necesario para los delimitadores
-    int width = 2; // El ancho de cada celda (puedes ajustarlo si deseas más espacio)
+    int width = 2;
     // Delimitador superior
     cout << "+";
     for (int i = 0; i < columnas; i++) {
