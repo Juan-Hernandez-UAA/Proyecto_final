@@ -21,17 +21,17 @@ Le ha quitado otra patita
 La cucaracha, la cucaracha
 Ya no puede caminar
 Porque no tiene, porque le falta
-Las dos patitas de atrás
+Las dos patitas de atras
 Enfadada y muy molesta
-Llamó a todas sus amigas
+Llamo a todas sus amigas
 "Ay, pronto haremos una fiesta
 En medio de la cocina"
 La cucaracha, la cucaracha
 Ya no puede caminar
 Porque no tiene, porque le falta
-Las dos patitas de atrás
+Las dos patitas de atras
 Las cucarachas, las cucarachas
 Nunca paran de bailar
 Aunque no tengan, aunque les falten
-Las dos patitas de atrás
-Se acabó*/
+Las dos patitas de atras
+Se acabo*/
