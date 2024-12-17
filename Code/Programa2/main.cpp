@@ -125,7 +125,7 @@ void handleOption(int opcion, const map<int, pair<string, function<void()>>> &op
         printInfo("Saliendo del programa...");
     } else {
         printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
-        opciones.at(opcion).second(); // Ejecuta la función asociada
+        opciones.at(opcion).second(); // Ejecuta la funcion asociada
     }
 }
 
@@ -156,7 +156,7 @@ bool validarCaracter(const string &input, T &caracterValido, const string &mensa
 void numeroMayor() {
     vector<int> numeros(4);
 
-    // Entrada de números con un bucle para evitar repetición
+    // Entrada de numeros con un bucle para evitar repeticion
     for (int i = 0; i < 4; ++i) {
         printf("Ingrese el numero %d: ", i + 1);
         scanf("%d", &numeros[i]);
@@ -177,18 +177,18 @@ void oficinaAgua() {
     int estrato, metros_consumidos;
     int total_factura = 0;
 
-    // Solicitud de datos para el cálculo de agua
+    // Solicitud de datos para el calculo de agua
     cout << "Ingrese el estrato socioeconomico (1-6): ";
     cin >> estrato;
 
-    // Validación del estrato
+    // Validacion del estrato
     if (estrato < 1 || estrato > 6) {
         cout << "Error, el estrato ingresado es incorrecto, ingrese uno entre 1 y 6" << endl;
     } else {
         cout << "Ingrese la cantidad de metros cubicos consumidos: ";
         cin >> metros_consumidos;
 
-        // Cálculo de factura
+        // Calculo de factura
         int indice = estrato - 1; // Ajuste del indice al rango del arreglo
         total_factura += cargo_fijo[indice];
         total_factura += costo_metro[indice] * metros_consumidos;
@@ -215,7 +215,7 @@ void oficinaEjercito() {
             esGeneroValido = true;
         } while (!esGeneroValido);
 
-        // Definir parámetros de validación para cada género
+        // Definir parametros de validacion para cada genero
         if (sexo == 'F') {
             validarSujeto('S', 1.60, 20, 25);
         } else {
@@ -225,7 +225,7 @@ void oficinaEjercito() {
         cout << "Desea realizar otra validacion? (s/n): ";
         cin >> input;
         if (!validarCaracter(input, continuar, "Debe ingresar solo un caracter (S o N)", "SN")) {
-            continuar = 'N'; // Salir si la entrada es inválida
+            continuar = 'N'; // Salir si la entrada es invalida
         }
 
         cout << "\n";
@@ -239,7 +239,7 @@ int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, 
     string input;
     char estadoCivil;
 
-    // Validación del estado civil
+    // Validacion del estado civil
     do {
         cout << "Ingrese el estado civil: Soltero(S), Viudo(V), Casado(C), Divorciado(D): ";
         cin >> input;
@@ -253,7 +253,7 @@ int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, 
         break;
     } while (true);
 
-    // Validación de la edad
+    // Validacion de la edad
     cout << "Ingrese la edad: ";
     cin >> edad;
     if (edad < edadMinima || edad > edadMaxima) {
@@ -261,7 +261,7 @@ int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, 
         return 1;
     }
 
-    // Validación de la estatura
+    // Validacion de la estatura
     cout << "Ingrese la estatura en metros: ";
     cin >> estatura;
     if (estatura <= estaturaMinima) {
@@ -269,7 +269,7 @@ int validarSujeto(char estadoCivilValido, float estaturaMinima, int edadMinima, 
         return 1;
     }
 
-    // Si todo es válido
+    // Si todo es valido
     cout << GREEN << "\nSujeto apto para el ejercito." << RESET << endl;
     return 0;
 }
@@ -300,7 +300,7 @@ void mcdMcm() {
     char continuar;
 
     do {
-        // Validación de número 1 positivo
+        // Validacion de numero 1 positivo
         do {
             printf("Ingrese el numero 1 positivo: ");
             scanf("%d", &num1);
@@ -308,9 +308,9 @@ void mcdMcm() {
             if (num1 <= 0) {
                 cout << YELLOW << "El primer numero debe ser positivo. Intente nuevamente." << RESET << endl;
             }
-        } while (num1 <= 0); // Repetir hasta que el número 1 sea positivo
+        } while (num1 <= 0); // Repetir hasta que el numero 1 sea positivo
 
-        // Validación de número 2 positivo
+        // Validacion de numero 2 positivo
         do {
             printf("Ingrese el numero 2 positivo: ");
             scanf("%d", &num2);
@@ -318,7 +318,7 @@ void mcdMcm() {
             if (num2 <= 0) {
                 cout << YELLOW << "El segundo numero debe ser positivo. Intente nuevamente." << RESET << endl;
             }
-        } while (num2 <= 0); // Repetir hasta que el número 2 sea positivo
+        } while (num2 <= 0); // Repetir hasta que el numero 2 sea positivo
 
         // Calcular el MCD
         mcd = calcularMCD(num1, num2);
@@ -328,9 +328,9 @@ void mcdMcm() {
         printf("El MCD de %d y %d es: %d\n", num1, num2, mcd);
         printf("El MCM de %d y %d es: %d\n", num1, num2, mcm);
 
-        // Preguntar si desea realizar otro cálculo
+        // Preguntar si desea realizar otro calculo
         printf("Desea realizar otro calculo (s/n): ");
-        scanf(" %c", &continuar); // Espacio antes de %c para leer correctamente el carácter
+        scanf(" %c", &continuar); // Espacio antes de %c para leer correctamente el caracter
 
     } while (continuar == 's' || continuar == 'S');
 }
@@ -401,7 +401,7 @@ void numeroTexto() {
     printf("Ingresa cualquier numero entre el 0 y 99: ");
     scanf("%d", &numero);
     if (numero < 0 || numero > 99) {
-        printf("El numero que usted ingreso, no está en el rango permitido (0-99).\n");
+        printf("El numero que usted ingreso, no esta en el rango permitido (0-99).\n");
     } else {
         printf("%sEl numero en palabras es: ", YELLOW);
         numeroEnPalabras(numero);

@@ -86,16 +86,16 @@ void menu() {
     int opcion = -1;
 
     do {
-        displayMenu(opciones); // Mostrar el menú
+        displayMenu(opciones); // Mostrar el menu
 
         cin >> opcion;
 
-        system("CLS"); // Limpiar la pantalla después de la selección
+        system("CLS"); // Limpiar la pantalla despues de la seleccion
         header();      // Mostrar header personalizado
         cout << "\n";
 
-        handleOption(opcion, opciones, 9); // Manejar la opción seleccionada
-    } while (opcion != 9); // Repetir el menú hasta que el usuario elija salir
+        handleOption(opcion, opciones, 9); // Manejar la opcion seleccionada
+    } while (opcion != 9); // Repetir el menu hasta que el usuario elija salir
 }
 
 void displayMenu(const map<int, pair<string, function<void()>>> &opciones) {
@@ -116,7 +116,7 @@ void handleOption(int opcion, const map<int, pair<string, function<void()>>> &op
         printInfo("Saliendo del programa...");
     } else {
         printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
-        opciones.at(opcion).second(); // Ejecuta la función asociada
+        opciones.at(opcion).second(); // Ejecuta la funcion asociada
     }
 }
 
@@ -140,19 +140,19 @@ void areaFigura() {
     printf("Dame el valor de la hipotenusa: ");
     scanf("%f", &hipo);
 
-    // Verificación de que la hipotenusa sea mayor que el radio
+    // Verificacion de que la hipotenusa sea mayor que el radio
     if (hipo < radio) {
         printError("la hipotenusa debe ser mayor que el radio");
         return;
     }
 
-    // Cálculo del cateto usando el teorema de Pitágoras
+    // Calculo del cateto usando el teorema de Pitagoras
     cateto = sqrt(pow(hipo, 2) - pow(radio, 2));
-    // Cálculo del área triangular
+    // Calculo del area triangular
     areatri = (radio * cateto) / 2;
-    // Cálculo del área del semicirculo
+    // Calculo del area del semicirculo
     areacir = (PI * radio * radio) / 2;
-    // Área total
+    // area total
     areatotal = areatri + areacir;
 
     printf("\n%sEl area total de la figura es: %.2f%s\n", YELLOW, areatotal, RESET);
@@ -183,7 +183,7 @@ void cantidadMayor() {
     char repetir;
 
     do {
-        // Entrada de los tres números
+        // Entrada de los tres numeros
         printf("Ingrese el primer valor (A): ");
         scanf("%f", &numero1);
         printf("Ingrese el segundo valor (B): ");
@@ -203,7 +203,7 @@ void cantidadMayor() {
         // Mostrar el resultado
         printf("%sLa cantidad mayor es: %.2f%s\n", YELLOW, mayor, RESET);
 
-        // Preguntar al usuario si desea realizar otra operación
+        // Preguntar al usuario si desea realizar otra operacion
         printf("\nDesea realizar otra operacion? (s/n): ");
         scanf(" %c", &repetir);
         cout << "\n";
@@ -266,7 +266,7 @@ void companiaTelefonica() {
                 } else if (tiempo <= 10) {
                     costo = (tiempo - 8) * 0.7 + 5 * 1 + 3 * 0.8; // Primer bloque de 5 minutos + siguiente bloque de 3 minutos + siguiente bloque de 2 minutos
                 } else {
-                    costo = (tiempo - 10) * 0.5 + 5 * 1 + 3 * 0.8 + 2 * 0.7; // Primer bloque de 5 minutos + siguiente bloque de 3 minutos + siguiente bloque de 2 minutos + bloque extra de más de 10 minutos
+                    costo = (tiempo - 10) * 0.5 + 5 * 1 + 3 * 0.8 + 2 * 0.7; // Primer bloque de 5 minutos + siguiente bloque de 3 minutos + siguiente bloque de 2 minutos + bloque extra de mas de 10 minutos
                 }
 
                 // Calculo del impuesto
@@ -301,7 +301,7 @@ void companiaViajes() {
     printf("Ingrese el numero de personas: ");
     scanf("%d", &personas);
 
-    // Ajustar el número de personas si es menor a 20
+    // Ajustar el numero de personas si es menor a 20
     if (personas < 20) {
         personas = 20;
     }
@@ -322,10 +322,10 @@ void companiaViajes() {
         break;
     default:
         printf("Tipo de autobus invalido.\n");
-        return; // Salir de la función si el tipo de autobús no es válido
+        return; // Salir de la funcion si el tipo de autobus no es valido
     }
 
-    // Cálculo del costo total
+    // Calculo del costo total
     costo_total = distancia * personas * costo_por_persona;
 
     // Mostrar los resultados
@@ -357,8 +357,8 @@ void naufragoSatisfecho() {
         } else if (tipoHamburguesa == 3) {
             precioHamburguesa = HAMBURGUESA_TRIPLE;
         } else {
-            printf("Opción inválida. Por favor, elige un número entre 1 y 3.\n");
-            continue; // Si la opción es inválida, reinicia el ciclo
+            printf("Opcion invalida. Por favor, elige un numero entre 1 y 3.\n");
+            continue; // Si la opcion es invalida, reinicia el ciclo
         }
 
         printf("Ingresa la cantidad de hamburguesas: ");
@@ -366,7 +366,7 @@ void naufragoSatisfecho() {
 
         costoTotal = precioHamburguesa * cantidadHamburguesas;
 
-        // Preguntar si desea pagar con tarjeta de crédito
+        // Preguntar si desea pagar con tarjeta de credito
         printf("Desea pagar con tarjeta de credito? (s/n): ");
         scanf(" %c", &pagoTarjeta);
 
@@ -407,7 +407,7 @@ void companiaPaqueteria() {
             scanf("%f", &pesoPaquete);
 
             if (pesoPaquete <= 5) {
-                // Cálculo del costo según el destino
+                // Calculo del costo segun el destino
                 switch (destino) {
                 case 1:
                     costoEnvio = pesoPaquete * COSTO_AMERICA_NORTE;

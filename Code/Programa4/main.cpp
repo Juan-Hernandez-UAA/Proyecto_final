@@ -128,7 +128,7 @@ void handleOption(int opcion, const map<int, pair<string, function<void()>>> &op
         printInfo("Saliendo del programa...");
     } else {
         printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
-        opciones.at(opcion).second(); // Ejecuta la función asociada
+        opciones.at(opcion).second(); // Ejecuta la funcion asociada
     }
 }
 
@@ -146,14 +146,14 @@ void elCometa() {
     char repetir;
 
     do {
-        // Registro o entrada de clave para que inicie el código
+        // Registro o entrada de clave para que inicie el codigo
         do {
             printf("Ingrese la clave del articulo (1-6): ");
             scanf("%d", &clave);
             if (clave < 1 || clave > 6) {
                 printf("Clave invalida. Por favor, ingrese una clave entre 1 y 6.\n");
             }
-        } while (clave < 1 || clave > 6); // Función para repetir hasta que la opción sea válida
+        } while (clave < 1 || clave > 6); // Funcion para repetir hasta que la opcion sea valida
 
         // Entrada del costo de la materia prima
         printf("Ingrese el costo de la materia prima: ");
@@ -168,7 +168,7 @@ void elCometa() {
             costoManoObra = costoMateriaPrima * 0.85;
         }
 
-        // Calcular los gastos de fabricación
+        // Calcular los gastos de fabricacion
         if (clave == 2 || clave == 5) {
             gastosFabricacion = costoMateriaPrima * 0.30;
         } else if (clave == 3 || clave == 6) {
@@ -177,17 +177,17 @@ void elCometa() {
             gastosFabricacion = costoMateriaPrima * 0.28;
         }
 
-        // Calcular el costo de producción y el precio de venta
+        // Calcular el costo de produccion y el precio de venta
         costoProduccion = costoMateriaPrima + costoManoObra + gastosFabricacion;
         precioVenta = costoProduccion * 1.45;
 
-        // Datos que se imprimirán para el usuario
+        // Datos que se imprimiran para el usuario
         printf("%sCosto de mano de obra: %.2f\n", YELLOW, costoManoObra);
         printf("Gastos de fabricacion: %.2f\n", gastosFabricacion);
         printf("Costo de produccion: %.2f\n", costoProduccion);
         printf("Precio de venta: %.2f%s\n", precioVenta, RESET);
 
-        // Opción por si el usuario requiere repetir el proceso
+        // Opcion por si el usuario requiere repetir el proceso
         printf("\nDesea realizar otra operacion? (s/n): ");
         scanf(" %c", &repetir);
         cout << "\n";
@@ -235,7 +235,7 @@ void sueldoEmpleados() {
 }
 
 void elMandilon() {
-    // Definimos los structs dentro de la función elMandilon
+    // Definimos los structs dentro de la funcion elMandilon
     struct Empleado {
         string nombre;
         float ventas;
@@ -261,7 +261,7 @@ void elMandilon() {
         }
     };
 
-    // Función para registrar empleados
+    // Funcion para registrar empleados
     auto registrarEmpleado = [](vector<Empleado> &empleados) {
         int numEmpleados;
         cout << "  Cuantos empleados tiene esta tienda?: ";
@@ -280,7 +280,7 @@ void elMandilon() {
         }
     };
 
-    // Función para registrar tiendas
+    // Funcion para registrar tiendas
     auto registrarTienda = [&registrarEmpleado](vector<Tienda> &tiendas) { // Capturamos registrarEmpleado
         int numTiendas;
         cout << "\nCuantas tiendas tiene esta ciudad?: ";
@@ -299,7 +299,7 @@ void elMandilon() {
         }
     };
 
-    // Función principal de elMandilon
+    // Funcion principal de elMandilon
     int numCiudades;
     cout << "\nEn cuantas ciudades " YELLOW << "el mandilon" << RESET << " tiene prescencia?: ";
     cin >> numCiudades;
@@ -359,14 +359,14 @@ void sumaVectores() {
         // El numero de datos en el vector se declaran por N
         float A[N], B[N], C[N];
 
-        // Asignación de datos a la variable A
+        // Asignacion de datos a la variable A
         printf("Ingrese los elementos del vector A:\n");
         for (i = 0; i < N; i++) {
             printf("A[%d]: ", i);
             scanf("%f", &A[i]);
         }
 
-        // Asignación de datos a la variable B
+        // Asignacion de datos a la variable B
         printf("Ingrese los elementos del vector B:\n");
         for (i = 0; i < N; i++) {
             printf("B[%d]: ", i);
@@ -413,18 +413,18 @@ void tercerVector() {
         scanf("%d", &B[i]);
     }
 
-    // Generación del tercer vector C (productos a comprar para mantener el inventario)
+    // Generacion del tercer vector C (productos a comprar para mantener el inventario)
     for (int i = 0; i < 10; i++) {
         if (B[i] == A[i]) {
-            C[i] = B[i];  // Si los valores son iguales, no hay necesidad de comprar más
+            C[i] = B[i];  // Si los valores son iguales, no hay necesidad de comprar mas
         } else if (B[i] > A[i]) {
             C[i] = 2 * (B[i] - A[i]);  // Si el pedido es mayor, comprar el doble de la diferencia
         } else {
-            C[i] = B[i];  // Si el inventario es mayor, solo comprar lo necesario según el pedido
+            C[i] = B[i];  // Si el inventario es mayor, solo comprar lo necesario segun el pedido
         }
     }
 
-    // Presentación de resultados de manera más clara
+    // Presentacion de resultados de manera mas clara
     printf("%s\nResultados del Inventario:\n\n%s", YELLOW, RESET);
     printf("=============================================================\n");
     printf("%-10s %-16s %-12s %-15s\n", "Producto", "Inventario (A)", "Pedido (B)", "Compra Necesaria (C)");
@@ -483,14 +483,14 @@ void empresaBigOld() {
     printf("\nIngresa el numero de choferes: ");
     scanf("%d", &numChoferes);
 
-    // Consumir el salto de línea residual en el buffer
+    // Consumir el salto de linea residual en el buffer
     getchar();
 
     for (i = 0; i < numChoferes; i++) {
         printf("Ingrese el nombre del chofer #%d: ", i + 1);
         // Lectura del nombre completo del chofer
         fgets(nombreChofer[i], sizeof(nombreChofer[i]), stdin);
-        // Eliminar el salto de línea que fgets puede dejar en el nombre
+        // Eliminar el salto de linea que fgets puede dejar en el nombre
         nombreChofer[i][strcspn(nombreChofer[i], "\n")] = 0;
 
         printf("\nIngrese los kilometros que %s ha recorrido: \n", nombreChofer[i]);
@@ -499,10 +499,10 @@ void empresaBigOld() {
             scanf("%d", &kilometrosPorDia[i][j]);
         }
 
-        // Consumir el salto de línea residual en el buffer antes de volver al bucle
+        // Consumir el salto de linea residual en el buffer antes de volver al bucle
         getchar();
 
-        // Sumar los kilómetros recorridos durante la semana
+        // Sumar los kilometros recorridos durante la semana
         for (j = 0; j < 6; j++) {
             totalKilometrosPorChofer[i] += kilometrosPorDia[i][j];
         }
@@ -516,17 +516,17 @@ void empresaBigOld() {
 
     for (i = 0; i < numChoferes; i++) {
         printf("%-15s", nombreChofer[i]);
-        // Imprimir kilómetros recorridos cada día
+        // Imprimir kilometros recorridos cada dia
         for (j = 0; j < 6; j++) {
             printf("%-8d", kilometrosPorDia[i][j]);
         }
-        // Imprimir el total de kilómetros del chofer
+        // Imprimir el total de kilometros del chofer
         printf("%s%-8d%s\n", GREEN, totalKilometrosPorChofer[i], RESET);
     }
 }
 
 void sumaMatrices() {
-    srand(time(0)); // Semilla para la generación de números aleatorios
+    srand(time(0)); // Semilla para la generacion de numeros aleatorios
 
     int filas, columnas;
     cout << "Introduce el numero de filas: ";

@@ -124,7 +124,7 @@ void handleOption(int opcion, const map<int, pair<string, function<void()>>> &op
         printInfo("Saliendo del programa...");
     } else {
         printInfo("Ejecutando: " + opciones.at(opcion).first + "...");
-        opciones.at(opcion).second(); // Ejecuta la función asociada
+        opciones.at(opcion).second(); // Ejecuta la funcion asociada
         cout << "\n";
     }
 }
@@ -154,9 +154,9 @@ void tablaDepreciacion() {
         costo_final = costo_incial - depreciacion_acum;
 
         cout << setw(7) << anio                // Columna Año
-             << setw(15) << depreciacion_anual // Columna Depreciación
+             << setw(15) << depreciacion_anual // Columna Depreciacion
              << setw(26) << costo_final        // Columna Valor al final del año
-             << depreciacion_acum << "\n";     // Columna Depreciación acumulada
+             << depreciacion_acum << "\n";     // Columna Depreciacion acumulada
     }
 }
 
@@ -168,7 +168,7 @@ void pelotaLanzada() {
     printf("Dame el angulo: ");
     scanf("%f", &angulo);
     metros = millas * CONVERSION;                           // se convierte la medida de millas a mts para hacer el calculo
-    angulo = angulo * M_PI / 180;                           // Conversión de grados a radianes
+    angulo = angulo * M_PI / 180;                           // Conversion de grados a radianes
     altura = pow(metros * sin(angulo), 2) / (2 * GRAVEDAD); // formula para calcular alt maxima
     printf("%sLa altura maxima alcanzada por la pelota es de: %.2f metros%s\n", YELLOW, altura, RESET);
 }
@@ -208,7 +208,7 @@ void pelotaGolf() {
 
     // Bucle para calcular y mostrar los datos por segundo
     for (int t = 0; t <= tiempo_total; ++t) {
-        // Fórmula para calcular la distancia total
+        // Formula para calcular la distancia total
         dist_total = 0.5 * g * t * t;
 
         // Calcular la distancia recorrida en el intervalo actual
@@ -272,13 +272,13 @@ void ecuacion() {
     cout << "Dame el valor de x: ";
     cin >> x;
 
-    // Calcular el valor de y con la fórmula2
+    // Calcular el valor de y con la formula2
     y = (pow(x, 2) - 4) / 2 + (3 * x - 7 * pow(x, 4)) / (-5 * pow(x, 3)) + 4 * x - 2;
 
     // Mostrar el resultado desde el inicio
     cout << YELLOW "El resultado de la ecuacion con x = " << x << " es: " << y << RESET << endl;
 
-    // Mostrar la fórmula visualmente
+    // Mostrar la formula visualmente
     cout << "\n" << left;
     cout << setw(4) << "    " << setw(9) << " x^2 - 4 " << setw(3) << "" << setw(11) << " 3x - 7x^4 " << endl;
     cout << setw(4) << "y = " << setw(9) << "---------" << " + " << "" << setw(11) << "-----------" << endl;
@@ -287,21 +287,21 @@ void ecuacion() {
 
     cout << "Ahora, desglosaremos el proceso paso a paso...\n" << endl;
 
-    // Paso 1: Calcular la primera fracción
+    // Paso 1: Calcular la primera fraccion
     float parte1 = (pow(x, 2) - 4) / 2;
     cout << BOLD "Paso 1: Calcular la primera fraccion:" << RESET << endl;
     cout << "( x^2 - 4 ) / 2 = ( " << x << "^2 - 4 ) / 2" << endl;
     cout << "( " << pow(x, 2) << " - 4 ) / 2 = " << parte1 << endl;
     cout << "\n";
 
-    // Paso 2: Calcular la segunda fracción
+    // Paso 2: Calcular la segunda fraccion
     float parte2 = (3 * x - 7 * pow(x, 4)) / (-5 * pow(x, 3));
     cout << BOLD "Paso 2: Calcular la segunda fraccion:" << RESET << endl;
     cout << "( 3x - 7x^4 ) / ( -5x^3 ) = ( 3 * " << x << " - 7 * " << x << "^4 ) / ( -5 * " << x << "^3 )" << endl;
     cout << "( " << 3 * x << " - " << 7 * pow(x, 4) << " ) / ( " << -5 * pow(x, 3) << " ) = " << parte2 << endl;
     cout << "\n";
 
-    // Paso 3: Calcular el término restante
+    // Paso 3: Calcular el termino restante
     float parte3 = 4 * x - 2;
     cout << BOLD "Paso 3: Calcular el termino restante:" << RESET << endl;
     cout << "4x - 2 = 4 * " << x << " - 2" << endl;
